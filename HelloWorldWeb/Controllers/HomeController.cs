@@ -19,13 +19,9 @@ namespace HelloWorldWeb.Controllers
             _logger = logger;
             teamInfo = new TeamInfo();
             teamInfo.Name = "Team1";
-            teamInfo.TeamMembers = new List<string>();
-            teamInfo.TeamMembers.Add("Radu");
-            teamInfo.TeamMembers.Add("Teona");
-            teamInfo.TeamMembers.Add("Claudia");
-            teamInfo.TeamMembers.Add("Dragos");
-            teamInfo.TeamMembers.Add("Leon");
-            teamInfo.TeamMembers.Add("George");
+            teamInfo.TeamMembers = new List<string>(new string[] { "Claudia", "Radu", "Teona", "Dragos", "Leon", "George" });
+
+  
         }
 
         public IActionResult Index()
