@@ -18,12 +18,22 @@ namespace HelloWorldWeb.Controllers
         {
             _logger = logger;
             teamInfo = new TeamInfo();
-            teamInfo.Name = "Team1";
+            teamInfo.Name = "Team 3";
             teamInfo.TeamMembers = new List<string>(new string[] { "Claudia", "Radu", "Teona", "Dragos", "Leon", "George" });
-
-  
         }
 
+        [HttpGet]
+        public void AddTeamMember(string name)
+        {
+            teamInfo.TeamMembers.Add(name);
+
+        }
+
+        [HttpGet]
+        public int GetCount()
+        {
+            return teamInfo.TeamMembers.Count;
+        }
         public IActionResult Index()
         {
             return View(teamInfo);
