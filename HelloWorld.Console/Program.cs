@@ -6,6 +6,11 @@ namespace Hello_World
     {
         static void Main(string[] args)
         {
+            if (args is null)
+            {
+                throw new ArgumentNullException(nameof(args));
+            }
+
             Console.WriteLine("Hello Everyone!");
         }
     }
