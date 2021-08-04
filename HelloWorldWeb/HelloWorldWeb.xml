@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>HelloWorldWeb</name>
+    </assembly>
+    <members>
+        <member name="M:HelloWorldWeb.Startup.#ctor(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Initializes a new instance of the <see cref="T:HelloWorldWeb.Startup"/> class.
+            </summary>
+            <param name="configuration"></param>
+        </member>
+    </members>
+</doc>
