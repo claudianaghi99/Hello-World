@@ -11,10 +11,6 @@
 	    <ItemGroup>
 	      <AdditionalFiles Include="stylecop.json" />
 	    </ItemGroup>
-
-	<ItemGroup>
-		<None Include="..\.editconfig" Link=".editconfig"/>
-	</ItemGroup>
 	
 	<ItemGroup>
 	<PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
