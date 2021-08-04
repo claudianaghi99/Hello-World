@@ -8,6 +8,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using HelloWorldWeb.Models;
+using HelloWorldWeb.Service;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -17,19 +18,12 @@ namespace HelloWorldWeb.Controllers
     {
         private readonly ILogger<HomeController> logger;
         private readonly TeamInfo teamInfo;
+        private readonly ITeamService teamService;
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="HomeController"/> class.
-        /// </summary>
-        /// <param name="logger"></param>
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, ITeamService teamService)
         {
             this.logger = logger;
-            this.teamInfo = new TeamInfo
-            {
-                Name = "Team 3",
-                TeamMembers = new List<string>(new string[] { "Claudia", "Radu", "Teona", "Dragos", "Leon", "George" }),
-            };
+            this.teamService = teamService;
         }
 
         [HttpPost]
@@ -41,7 +35,7 @@ namespace HelloWorldWeb.Controllers
         [HttpGet]
         public int GetCount()
         {
-            return this.teamInfo.TeamMembers.Count;
+            return this.teamService.GetTeamInfo().TeamMembers.Count;
         }
 
         public IActionResult Index()
@@ -58,17 +52,6 @@ namespace HelloWorldWeb.Controllers
         public IActionResult Error()
         {
             return this.View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? this.HttpContext.TraceIdentifier });
-        }
-
-        public override bool Equals(object obj)
-        {
-            return obj is HomeController controller &&
-                   EqualityComparer<ILogger<HomeController>>.Default.Equals(this.logger, controller.logger);
-        }
-
-        public override int GetHashCode()
-        {
-            throw new NotImplementedException();
         }
     }
 }
