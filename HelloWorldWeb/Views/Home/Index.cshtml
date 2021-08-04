@@ -5,6 +5,8 @@
 @section scripts {
     <script type="text/javascript" src="~/js/Index.js"></script>
 }
+
+
 <div class="text-center">
     <h1 class="display-4">Our Team</h1>
     <ul id="teamList">
@@ -12,15 +14,12 @@
         {
             var member = Model.TeamMembers[i];
 
-
-
             <li class="member">
                 @member
             </li>
         }
-        
     </ul>
-    <input type="text" id="nameField" title="e.g Claudia" />
-    <button class="btn btn-primary" id="createButton" title="Create">Create</button>
+    <input type="text" id="nameField" title="e.g. Radu" />
+    <button class="btn-primary" id="createButton" title="Create">Create</button>
 
 </div>

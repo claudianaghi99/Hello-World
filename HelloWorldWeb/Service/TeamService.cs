@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using HelloWorldWeb.Models;
-using HelloWorldWeb.Service;
+using HelloWorldWeb.Services;
 
-namespace HelloWorldWebApp.Services
+namespace HelloWorldWeb.Services
 {
     public class TeamService : ITeamService
     {
@@ -16,15 +16,7 @@ namespace HelloWorldWebApp.Services
             this.teamInfo = new TeamInfo
             {
                 Name = "Team 3",
-                TeamMembers = new List<string>(new string[]
-               {
-                    "Sechei Radu",
-                    "Tanase Teona",
-                    "Duma Dragos",
-                    "Campean Leon",
-                    "Naghi Claudia",
-                    "Marian George",
-               }),
+                TeamMembers = new List<string>(new string[] { "Teona", "Radu", "Dragos", "Claudia", "Leon", "George" }),
             };
         }
 
@@ -33,9 +25,11 @@ namespace HelloWorldWebApp.Services
             return this.teamInfo;
         }
 
-        public void AddTeamMember(string name)
+        public string AddTeamMember(string name)
         {
-            this.teamInfo.TeamMembers.Add(name);
+            teamInfo.TeamMembers.Add(name);
+            return name;
         }
+
     }
 }

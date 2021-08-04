@@ -1,45 +1,45 @@
-﻿// <copyright file="HomeController.cs" company="Principal33">
-// Copyright (c) Principal33. All rights reserved.
+﻿// <copyright file="HomeController.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
 
-using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
 using HelloWorldWeb.Models;
-using HelloWorldWeb.Service;
+using HelloWorldWeb.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
-namespace HelloWorldWebApp.Controllers
+namespace HelloWorldWeb.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> logger;
+
         private readonly ITeamService teamService;
 
         public HomeController(ILogger<HomeController> logger, ITeamService teamService)
         {
             this.logger = logger;
+
             this.teamService = teamService;
+
         }
 
         [HttpPost]
-        public void AddTeamMember(string teamMember)
+        public void AddTeamMemeberHere(string name)
         {
-            teamService.AddTeamMember(teamMember);
+            this.teamService.AddTeamMember(name);
         }
 
         [HttpGet]
-        public int GetCount()
+        public int GetTeamMemberCount()
         {
             return teamService.GetTeamInfo().TeamMembers.Count;
         }
 
         public IActionResult Index()
         {
-            return View(teamService.GetTeamInfo());
+            return this.View(teamService.GetTeamInfo());
         }
 
         public IActionResult Privacy()

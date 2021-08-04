@@ -1,10 +1,10 @@
 ﻿using HelloWorldWeb.Models;
 
-namespace HelloWorldWeb.Service
+namespace HelloWorldWeb.Services
 {
     public interface ITeamService
     {
-        void AddTeamMember(string name);
+        string AddTeamMember(string name);
 
         TeamInfo GetTeamInfo();
     }
