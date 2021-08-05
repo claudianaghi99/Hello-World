@@ -25,4 +25,9 @@
                 $("#nameField").val("");
             });
     })
+
+    $("#clearButton").click(function ClearFields() {
+
+        document.getElementById("nameField").value = "";
+    });
 });
