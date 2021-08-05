@@ -11,10 +11,18 @@
         })
             .done(function (msg) {
                 alert("Data Saved: " + msg);
-                $("#teamList").append(`<li>${newcomerName}</li>`);
+                $("#teamList").append(`
+                <li class="member">
+
+                <span class="memberName">
+                    ${newcomerName}
+                </span>
+                <span class="delete fa fa-remove"></span>
+                <span class="remove fa fa-pencil"></span>
+
+                 </li>`);
+
                 $("#nameField").val("");
             });
-
-
     })
 });

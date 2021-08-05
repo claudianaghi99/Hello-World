@@ -16,17 +16,24 @@
         {
             var member = Model.TeamMembers[i];
 
-        <li class="member">
-            <span class="memberName">
-                @member
-            </span>
-            <span class="delete fa fa-remove"></span>               
-            <span class="remove fa fa-pencil"></span>
-        </li>
+            <li class="member">
+                <span class="memberName">
+                    @member
+                </span>
+                <span class="delete fa fa-remove"></span>
+                <span class="remove fa fa-pencil"></span>
+            </li>
 
         }
     </ul>
     <input type="text" id="nameField" title="e.g. Radu" />
     <button class="btn-primary" id="createButton" title="Create">Create</button>
+    <button class="btn-primary" id="clearButton" title="Clear">Clear</button>
 
+    <script>
+        $("#clearButton").click(function () {
+            $(this).prev('input').val('').trigger('change').focus();
+        }));
+    </script>
+    
 </div>
