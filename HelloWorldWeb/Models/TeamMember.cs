@@ -2,14 +2,17 @@
 // Copyright (c) Principal33. All rights reserved.
 // </copyright>
 
-using System.Collections.Generic;
-
 namespace HelloWorldWeb.Models
 {
-    public class TeamInfo
+    public class TeamMember
     {
+        public TeamMember( int id, string name)
+        {
+            this.Id = id;
+            this.Name = name;
+        }
+        public int Id { get; set; }
         public string Name { get; set; }
 
-        public List<TeamMember> TeamMembers { get; set; }
     }
 }
