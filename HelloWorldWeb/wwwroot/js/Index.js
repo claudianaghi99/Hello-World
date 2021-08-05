@@ -39,7 +39,7 @@
 
 (function () {
     $("#clearButton").click(function () {
-
+        document.getElementById("createButton").disabled = true;
         document.getElementById("nameField").value = "";
     });
 
