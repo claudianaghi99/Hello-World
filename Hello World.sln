@@ -12,6 +12,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.editorconfig = .editorconfig
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelloWorldWeb.Tests", "HelloWorldWeb.Tests\HelloWorldWeb.Tests.csproj", "{29478164-5442-4B5A-BF12-0D64BEB85AD4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -26,6 +28,10 @@ Global
 		{AD4FB6DB-2351-415B-947C-1BE7DCC2796C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AD4FB6DB-2351-415B-947C-1BE7DCC2796C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AD4FB6DB-2351-415B-947C-1BE7DCC2796C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{29478164-5442-4B5A-BF12-0D64BEB85AD4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{29478164-5442-4B5A-BF12-0D64BEB85AD4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{29478164-5442-4B5A-BF12-0D64BEB85AD4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{29478164-5442-4B5A-BF12-0D64BEB85AD4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
