@@ -39,6 +39,12 @@ namespace HelloWorldWebApp.Controllers
             return this.teamService.GetTeamInfo().TeamMembers.Count;
         }
 
+        [HttpPost]
+        public void UpdateMemberName(int memberId, string name)
+        {
+            this.teamService.UpdateMemberName(memberId, name);
+        }
+
         public IActionResult Index()
         {
             return this.View(this.teamService.GetTeamInfo());

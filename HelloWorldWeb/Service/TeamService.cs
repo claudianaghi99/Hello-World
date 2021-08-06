@@ -40,7 +40,7 @@ namespace HelloWorldWeb.Services
 
         public void RemoveMember(int id)
         {
-            var member = GetTeamMemberById(id);
+            var member = this.GetTeamMemberById(id);
             this.teamInfo.TeamMembers.Remove(member);
         }
 
@@ -55,6 +55,12 @@ namespace HelloWorldWeb.Services
             }
 
             return null;
+        }
+
+        public void UpdateMemberName(int memberId, string name)
+        {
+            int index = this.teamInfo.TeamMembers.FindIndex(element => element.Id == memberId);
+            this.teamInfo.TeamMembers[index].Name = name;
         }
     }
 }

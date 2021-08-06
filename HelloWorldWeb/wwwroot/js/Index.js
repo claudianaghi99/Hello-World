@@ -14,7 +14,7 @@
             success: (result) => {
                 console.log(result);
                 $("#teamList").append(
-                    `<li>
+                    `<li class="member" member-id=${result}>
                 <span class="memberName">
                         ${newcomerName}
                     </span >
@@ -36,7 +36,19 @@
     });
     $('#submit').click(function () {
         const id = $('#editClassmate').attr('member-id');
-        console.log(id);
+        const newName = $('#classmateName').val();
+
+        $.ajax({
+            url: "/Home/UpdateMemberName",
+            method: "POST",
+            data: {
+                memberId: id,
+                name: newName
+            },
+            success: function (result) {
+                location.reload();
+            }
+        })
     });
 
     $("#teamList").on("click", ".pencil", function () {

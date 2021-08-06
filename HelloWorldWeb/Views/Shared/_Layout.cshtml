@@ -34,7 +34,7 @@
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
-        @RenderSection("ModalWindow",false) 
+        @await RenderSectionAsync("ModalWindow", false)
     </div>
 
     <footer class="border-top footer text-muted">

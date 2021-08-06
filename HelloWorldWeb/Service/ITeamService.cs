@@ -11,5 +11,7 @@ namespace HelloWorldWeb.Services
         TeamMember GetTeamMemberById(int id);
 
         public void RemoveMember(int memberIndex);
+
+        public void UpdateMemberName(int memberId, string name);
     }
 }
