@@ -34,6 +34,19 @@
 
 
     });
+    $('#submit').click(function () {
+        const id = $('#editClassmate').attr('member-id');
+        console.log(id);
+    });
+
+    $("#teamList").on("click", ".pencil", function () {
+        var targetMemberTag = $(this).closest('li');
+        var id = targetMemberTag.attr('member-id');
+        var currentName = targetMemberTag.find(".name").text();
+        $('#editClassmate').attr("member-id", id);
+        $('#classmateName').val(currentName);
+        $('#editClassmate').modal('show');
+    })
 
 });
 
@@ -69,3 +82,4 @@ function deleteMember(index) {
         }
     });
 }());
+
