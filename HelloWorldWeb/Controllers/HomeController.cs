@@ -24,24 +24,24 @@ namespace HelloWorldWebApp.Controllers
         [HttpPost]
         public void AddTeamMember(string teamMember)
         {
-            teamService.AddTeamMember(teamMember);
+            this.teamService.AddTeamMember(teamMember);
         }
 
         [HttpDelete]
         public void RemoveMember(int memberIndex)
         {
-            teamService.RemoveMember(memberIndex);
+            this.teamService.RemoveMember(memberIndex);
         }
 
         [HttpGet]
         public int GetCount()
         {
-            return teamService.GetTeamInfo().TeamMembers.Count;
+            return this.teamService.GetTeamInfo().TeamMembers.Count;
         }
 
         public IActionResult Index()
         {
-            return this.View(teamService.GetTeamInfo());
+            return this.View(this.teamService.GetTeamInfo());
         }
 
         public IActionResult Privacy()
