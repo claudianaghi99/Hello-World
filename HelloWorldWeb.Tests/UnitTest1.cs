@@ -20,7 +20,7 @@ namespace HelloWorldWeb.Tests
             Assert.Equal(7, teamService.GetTeamInfo().TeamMembers.Count);
         }
         [Fact]
-public void RemoveMemberFromTheTeam()
+        public void RemoveMemberFromTheTeam()
         {
             // Assume
             TeamService teamService = new TeamService();
@@ -36,6 +36,22 @@ public void RemoveMemberFromTheTeam()
             Assert.Equal(5, teamService.GetTeamInfo().TeamMembers.Count);
         }
 
+        [Fact]
+
+        public void UpdateTeamMember()
+        {
+            //Assume
+
+            ITeamService teamService = new TeamService();
+
+            //Act
+
+            teamService.UpdateMemberName(0, "Alex");
+
+            //Assert
+
+            Assert.Equal("Alex", teamService.GetTeamMemberById(0).Name);
+        }
 
     }
 }
