@@ -59,8 +59,8 @@ namespace HelloWorldWeb.Services
 
         public void UpdateMemberName(int memberId, string name)
         {
-            int index = this.teamInfo.TeamMembers.FindIndex(element => element.Id == memberId);
-            this.teamInfo.TeamMembers[index].Name = name;
+            TeamMember member = this.teamInfo.TeamMembers.Single(element => element.Id == memberId);
+            member.Name = name;
         }
     }
 }
