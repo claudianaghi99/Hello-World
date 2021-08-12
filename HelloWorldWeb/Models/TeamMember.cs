@@ -5,11 +5,6 @@ namespace HelloWorldWeb.Models
 {
     public class TeamMember
     {
-        public static int GetIdCount()
-        {
-            return idCount;
-        }
-
         private static int idCount = 0;
         private readonly ITimeService timeService;
 
@@ -26,6 +21,11 @@ namespace HelloWorldWeb.Models
         public string Name { get; set; }
 
         public DateTime Birthdate { get; set; }
+
+        public static int GetIdCount()
+        {
+            return idCount;
+        }
 
         public int GetAge()
         {

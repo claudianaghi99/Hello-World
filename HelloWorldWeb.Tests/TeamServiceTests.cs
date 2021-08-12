@@ -23,20 +23,20 @@ namespace HelloWorldWeb.Tests
             Assert.Equal(initialCount + 1, teamService.GetTeamInfo().TeamMembers.Count);
         }
 
-        [Fact]
+        /*  [Fact]
         public void RemoveMemberFromTheTeam2()
-        {
-            // Assume
-            ITeamService teamServiceForRemove = new TeamService();
-            int initialCount = teamServiceForRemove.GetTeamInfo().TeamMembers.Count;
-            TeamMember firstMember = teamServiceForRemove.GetTeamInfo().TeamMembers[0];
+         {
+             // Assume
+             ITeamService teamServiceForRemove = new TeamService();
+             int initialCount = teamServiceForRemove.GetTeamInfo().TeamMembers.Count;
+             TeamMember firstMember = teamServiceForRemove.GetTeamInfo().TeamMembers[0];
 
-            // Act
-            teamServiceForRemove.RemoveMember(firstMember.Id);
+             // Act
+             teamServiceForRemove.RemoveMember(firstMember.Id);
 
-            // Assert
-            Assert.Equal(initialCount - 1, teamServiceForRemove.GetTeamInfo().TeamMembers.Count);
-        }
+             // Assert
+             Assert.Equal(initialCount - 1, teamServiceForRemove.GetTeamInfo().TeamMembers.Count);
+         }*/
 
         [Fact]
         public void UpdateTeamMember2()

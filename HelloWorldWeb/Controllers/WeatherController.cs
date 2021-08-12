@@ -83,8 +83,7 @@ namespace HelloWorldWebApp.Controllers
 
         private float ConvertKelvintoCelsius(float kelvin)
         {
-            float celsius;
-            celsius = kelvin - 272.15f;
+            float celsius = kelvin - 272.15f;
             return celsius;
         }
     }
