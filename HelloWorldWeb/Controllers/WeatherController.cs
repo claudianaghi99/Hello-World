@@ -46,7 +46,7 @@ namespace HelloWorldWebApp.Controllers
                 dailyWeatherRecord.Date = DateTimeOffset.FromUnixTimeSeconds(unixDateTime).Date;
 
                 float temp = item.SelectToken("temp").Value<float>("day");
-                dailyWeatherRecord.Temperature = convertKelvintoCelsius(temp);
+                dailyWeatherRecord.Temperature = this.ConvertKelvintoCelsius(temp);
 
                 string weather = item.SelectToken("weather")[0].Value<string>("description");
                 dailyWeatherRecord.Type = this.Convert(weather);
@@ -81,8 +81,8 @@ namespace HelloWorldWebApp.Controllers
             }
         }
 
-        private float convertKelvintoCelsius(float kelvin)
-        { 
+        private float ConvertKelvintoCelsius(float kelvin)
+        {
             float celsius;
             celsius = kelvin - 272.15f;
             return celsius;

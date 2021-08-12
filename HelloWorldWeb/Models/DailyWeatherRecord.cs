@@ -9,9 +9,9 @@ namespace HelloWorldWeb.Models
     {
         public DailyWeatherRecord(DateTime day, float temperature, WeatherType type)
         {
-            Date = day;
-            Temperature = temperature;
-            Type = type;
+            this.Date = day;
+            this.Temperature = temperature;
+            this.Type = type;
         }
 
         public float Temperature { get; set; }

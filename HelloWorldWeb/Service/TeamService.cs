@@ -1,15 +1,15 @@
-﻿using HelloWorldWeb.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using HelloWorldWeb.Models;
 
 namespace HelloWorldWeb.Services
 {
     public class TeamService : ITeamService
     {
         private readonly TeamInfo teamInfo;
-        private ITimeService timeService;
+        private readonly ITimeService timeService;
 
         public TeamService()
         {
@@ -18,12 +18,12 @@ namespace HelloWorldWeb.Services
                 Name = "Team 3",
                 TeamMembers = new List<TeamMember>(),
             };
-            AddTeamMember("Radu");
-            AddTeamMember("Teona");
-            AddTeamMember("Claudia");
-            AddTeamMember("Leon");
-            AddTeamMember("George");
-            AddTeamMember("Dragos");
+            this.AddTeamMember("Radu");
+            this.AddTeamMember("Teona");
+            this.AddTeamMember("Claudia");
+            this.AddTeamMember("Leon");
+            this.AddTeamMember("George");
+            this.AddTeamMember("Dragos");
         }
 
         public TeamInfo GetTeamInfo()
@@ -33,7 +33,7 @@ namespace HelloWorldWeb.Services
 
         public TeamMember GetTeamMemberById(int id)
         {
-            foreach (TeamMember member in teamInfo.TeamMembers)
+            foreach (TeamMember member in this.teamInfo.TeamMembers)
             {
                 if (member.Id == id)
                 {
@@ -46,21 +46,21 @@ namespace HelloWorldWeb.Services
 
         public int AddTeamMember(string name)
         {
-            TeamMember member = new TeamMember(name, timeService);
+            TeamMember member = new TeamMember(name, this.timeService);
             this.teamInfo.TeamMembers.Add(member);
             return member.Id;
         }
 
         public void RemoveMember(int id)
         {
-            var member = GetTeamMemberById(id);
+            var member = this.GetTeamMemberById(id);
             this.teamInfo.TeamMembers.Remove(member);
         }
 
         public void UpdateMemberName(int memberId, string name)
         {
-            int index = teamInfo.TeamMembers.FindIndex(element => element.Id == memberId);
-            teamInfo.TeamMembers[index].Name = name;
+            int index = this.teamInfo.TeamMembers.FindIndex(element => element.Id == memberId);
+            this.teamInfo.TeamMembers[index].Name = name;
         }
     }
 }
