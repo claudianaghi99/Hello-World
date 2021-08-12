@@ -1,10 +1,15 @@
-﻿using HelloWorldWeb.Services;
-using System;
+﻿using System;
+using HelloWorldWeb.Services;
 
 namespace HelloWorldWeb.Models
 {
     public class TeamMember
     {
+        public static int GetIdCount()
+        {
+            return idCount;
+        }
+
         private static int idCount = 0;
         private readonly ITimeService timeService;
 
@@ -27,15 +32,10 @@ namespace HelloWorldWeb.Models
             TimeSpan age;
             DateTime birthdate = this.Birthdate;
             DateTime zeroTime = new DateTime(1, 1, 1);
-            age = timeService.Now() - birthdate;
+            age = this.timeService.Now() - birthdate;
             int years = (zeroTime + age).Year - 1;
 
             return years;
-        }
-
-        public static int GetIdCount()
-        {
-            return idCount;
         }
     }
 }
