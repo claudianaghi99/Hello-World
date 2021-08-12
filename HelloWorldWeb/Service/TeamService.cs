@@ -1,15 +1,15 @@
-﻿using System;
+﻿using HelloWorldWeb.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using HelloWorldWeb.Models;
-using HelloWorldWeb.Services;
 
 namespace HelloWorldWeb.Services
 {
     public class TeamService : ITeamService
     {
         private readonly TeamInfo teamInfo;
+        private ITimeService timeService;
 
         public TeamService()
         {
@@ -18,12 +18,12 @@ namespace HelloWorldWeb.Services
                 Name = "Team 3",
                 TeamMembers = new List<TeamMember>(),
             };
-            this.AddTeamMember("Radu");
-            this.AddTeamMember("Teona");
-            this.AddTeamMember("Claudia");
-            this.AddTeamMember("Leon");
-            this.AddTeamMember("George");
-            this.AddTeamMember("Dragos");
+            AddTeamMember("Radu");
+            AddTeamMember("Teona");
+            AddTeamMember("Claudia");
+            AddTeamMember("Leon");
+            AddTeamMember("George");
+            AddTeamMember("Dragos");
         }
 
         public TeamInfo GetTeamInfo()
@@ -31,22 +31,9 @@ namespace HelloWorldWeb.Services
             return this.teamInfo;
         }
 
-        public int AddTeamMember(string name)
-        {
-            TeamMember member = new TeamMember(name);
-            this.teamInfo.TeamMembers.Add(member);
-            return member.Id;
-        }
-
-        public void RemoveMember(int id)
-        {
-            var member = this.GetTeamMemberById(id);
-            this.teamInfo.TeamMembers.Remove(member);
-        }
-
         public TeamMember GetTeamMemberById(int id)
         {
-            foreach (TeamMember member in this.teamInfo.TeamMembers)
+            foreach (TeamMember member in teamInfo.TeamMembers)
             {
                 if (member.Id == id)
                 {
@@ -57,10 +44,23 @@ namespace HelloWorldWeb.Services
             return null;
         }
 
+        public int AddTeamMember(string name)
+        {
+            TeamMember member = new TeamMember(name, timeService);
+            this.teamInfo.TeamMembers.Add(member);
+            return member.Id;
+        }
+
+        public void RemoveMember(int id)
+        {
+            var member = GetTeamMemberById(id);
+            this.teamInfo.TeamMembers.Remove(member);
+        }
+
         public void UpdateMemberName(int memberId, string name)
         {
-            TeamMember member = this.teamInfo.TeamMembers.Single(element => element.Id == memberId);
-            member.Name = name;
+            int index = teamInfo.TeamMembers.FindIndex(element => element.Id == memberId);
+            teamInfo.TeamMembers[index].Name = name;
         }
     }
-}//
+}

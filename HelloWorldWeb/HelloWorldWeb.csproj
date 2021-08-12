@@ -1,25 +1,32 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
-	    <PropertyGroup>
-		    <TargetFramework>net5.0</TargetFramework>
-		    <UserSecretsId>0b8440d2-b499-4fbd-addd-cad9d1fbc498</UserSecretsId>
-		    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
-	    </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net5.0</TargetFramework>
+		<StartupObject>HelloWorldWeb.Program</StartupObject>
+		<RunAnalyzersDuringBuild>true</RunAnalyzersDuringBuild>
+	</PropertyGroup>
 
-	    <ItemGroup>
-	      <Content Remove="stylecop.json" />
-	    </ItemGroup>
-
-	    <ItemGroup>
-	      <AdditionalFiles Include="stylecop.json" />
-	    </ItemGroup>
-	
 	<ItemGroup>
-	<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.14" />
-	<PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
-	<PrivateAssets>all</PrivateAssets>
-	<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-	</PackageReference>
-	</ItemGroup> 
+		<Compile Remove="NewFolder1\**" />
+		<Content Remove="NewFolder1\**" />
+		<EmbeddedResource Remove="NewFolder1\**" />
+		<None Remove="NewFolder1\**" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Moq" Version="4.16.1" />
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+		<PackageReference Include="RestSharp" Version="106.12.0" />
+		<PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<AdditionalFiles Include="..\stylecop.json" Link="stylecop.json" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Include="..\.editorconfig" Link=".editorconfig" />
+	</ItemGroup>
+
 
 </Project>

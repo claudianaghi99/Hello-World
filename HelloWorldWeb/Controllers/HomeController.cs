@@ -1,36 +1,30 @@
-﻿// <copyright file="HomeController.cs" company="Principal 33">
-// Copyright (c) Principal 33. All rights reserved.
+﻿// <copyright file="HomeController.cs" company="Principal33">
+// Copyright (c) Principal33. All rights reserved.
 // </copyright>
 
+using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
+using System.Threading.Tasks;
 using HelloWorldWeb.Models;
 using HelloWorldWeb.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
-namespace HelloWorldWebApp.Controllers
+namespace HelloWorldWeb.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> logger;
         private readonly ITeamService teamService;
+        private readonly ITimeService timeService;
 
-        public HomeController(ILogger<HomeController> logger, ITeamService teamService)
+        public HomeController(ILogger<HomeController> logger, ITeamService teamService, ITimeService timeService)
         {
             this.logger = logger;
             this.teamService = teamService;
-        }
-
-        [HttpPost]
-        public void AddTeamMember(string teamMember)
-        {
-            this.teamService.AddTeamMember(teamMember);
-        }
-
-        [HttpDelete]
-        public void RemoveMember(int memberIndex)
-        {
-            this.teamService.RemoveMember(memberIndex);
+            this.timeService = timeService;
         }
 
         [HttpGet]
@@ -40,9 +34,21 @@ namespace HelloWorldWebApp.Controllers
         }
 
         [HttpPost]
-        public void UpdateMemberName(int memberId, string name)
+        public int AddTeamMember(string name)
         {
-            this.teamService.UpdateMemberName(memberId, name);
+            return this.teamService.AddTeamMember(name);
+        }
+
+        [HttpDelete]
+        public void RemoveMember(int memberIndex)
+        {
+            teamService.RemoveMember(memberIndex);
+        }
+
+        [HttpPost]
+        public void UpdateMemberName(int memberId, String name)
+        {
+            teamService.UpdateMemberName(memberId, name);
         }
 
         public IActionResult Index()
