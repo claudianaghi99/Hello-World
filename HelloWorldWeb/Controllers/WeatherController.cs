@@ -40,8 +40,7 @@ namespace HelloWorldWebApp.Controllers
 
             foreach (var item in jsonArray)
             {
-                // TODO: convert item to dailyWeatherRecord
-                DailyWeatherRecord dailyWeatherRecord = new DailyWeatherRecord(new DateTime(2021, 8, 12), 22.0f, WeatherType.Mild);
+                DailyWeatherRecord dailyWeatherRecord = new DailyWeatherRecord();
                 long unixDateTime = item.Value<long>("dt");
                 dailyWeatherRecord.Date = DateTimeOffset.FromUnixTimeSeconds(unixDateTime).Date;
 
@@ -83,7 +82,7 @@ namespace HelloWorldWebApp.Controllers
 
         private float ConvertKelvintoCelsius(float kelvin)
         {
-            float celsius = kelvin - 272.15f;
+            float celsius = kelvin - 273.15f;
             return celsius;
         }
     }
