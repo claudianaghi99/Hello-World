@@ -4,11 +4,10 @@
         <name>HelloWorldWeb</name>
     </assembly>
     <members>
-        <member name="M:HelloWorldWeb.Startup.#ctor(Microsoft.Extensions.Configuration.IConfiguration)">
+        <member name="T:HelloWorldWebApp.Controllers.WeatherController">
             <summary>
-            Initializes a new instance of the <see cref="T:HelloWorldWeb.Startup"/> class.
+            fetch data from weather API.
             </summary>
-            <param name="configuration"></param>
         </member>
     </members>
 </doc>
