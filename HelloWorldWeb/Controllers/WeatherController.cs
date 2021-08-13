@@ -42,12 +42,12 @@ namespace HelloWorldWebApp.Controllers
         public IEnumerable<DailyWeatherRecord> ConvertResponseToWeatherForecastList(string content)
         {
             var json = JObject.Parse(content);
-
+/*
             if (json["daily"] == null)
             {
                 throw new Exception("ApiKey is not valid.");
             }
-
+*/
             var jsonArray = json["daily"].Take(7);
 
             // lambda expression
@@ -80,14 +80,28 @@ namespace HelloWorldWebApp.Controllers
         {
             switch (weather)
             {
-                case "few clouds":
-                    return WeatherType.FewClouds;
-                case "broken clouds":
-                    return WeatherType.BrokenClouds;
+                case "thunderstorm":
+                    return WeatherType.Thunderstorm;
                 case "light rain":
                     return WeatherType.LightRain;
                 case "moderate rain":
                     return WeatherType.ModerateRain;
+                case "heavy intensity rain":
+                    return WeatherType.HeavyRain;
+                case "very heavy rain":
+                    return WeatherType.HeavyRain;
+                case "snow":
+                    return WeatherType.Snow;
+                case "mist":
+                    return WeatherType.Mist;
+                case "fog":
+                    return WeatherType.Fog;
+                case "clear sky":
+                    return WeatherType.ClearSky;
+                case "few clouds":
+                    return WeatherType.FewClouds;
+                case "broken clouds":
+                    return WeatherType.BrokenClouds;
                 default:
                     throw new Exception($"Unknown weather type {weather}.");
             }
