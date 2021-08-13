@@ -33,11 +33,8 @@ namespace HelloWorldWebApp.Controllers
         public IEnumerable<DailyWeatherRecord> ConvertResponseToWeatherForecastList(string content)
         {
             var json = JObject.Parse(content);
-
-            List<DailyWeatherRecord> result = new List<DailyWeatherRecord>();
             var jsonArray = json["daily"].Take(7);
-            result.AddRange(jsonArray.Select(CreateDailyWeatherRecordFromJToken));
-            return result;
+            return jsonArray.Select(this.CreateDailyWeatherRecordFromJToken);
         }
 
         private DailyWeatherRecord CreateDailyWeatherRecordFromJToken(JToken item)
@@ -46,11 +43,11 @@ namespace HelloWorldWebApp.Controllers
             var day = DateTimeOffset.FromUnixTimeSeconds(unixDateTime).DateTime.Date;
 
             float temp = item.SelectToken("temp").Value<float>("day");
-            //dailyWeatherRecord.Temperature = this.ConvertKelvintoCelsius(temp);
+            // dailyWeatherRecord.Temperature = this.ConvertKelvintoCelsius(temp);
 
             string weather = item.SelectToken("weather")[0].Value<string>("description");
             var type = this.Convert(weather);
-            DailyWeatherRecord dailyWeatherRecord = new DailyWeatherRecord(day, ConvertKelvintoCelsius(temp), type);
+            DailyWeatherRecord dailyWeatherRecord = new DailyWeatherRecord(day, this.ConvertKelvintoCelsius(temp), type);
             return dailyWeatherRecord;
         }
 
