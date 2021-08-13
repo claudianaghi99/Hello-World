@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
@@ -19,7 +19,15 @@
     </PackageReference>
   </ItemGroup>
 
-  <ItemGroup>
+	<ItemGroup>
+		<None Remove="ContentWeatherApi.json" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<EmbeddedResource Include="TestData\ContentWeatherApi.json" />
+	</ItemGroup>
+	
+	<ItemGroup>
     <ProjectReference Include="..\HelloWorldWeb\HelloWorldWeb.csproj" />
   </ItemGroup>
 

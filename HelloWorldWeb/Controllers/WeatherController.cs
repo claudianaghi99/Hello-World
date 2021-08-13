@@ -45,12 +45,12 @@ namespace HelloWorldWebApp.Controllers
         public IEnumerable<DailyWeatherRecord> ConvertResponseToWeatherForecastList(string content)
         {
             var json = JObject.Parse(content);
-/*
+
             if (json["daily"] == null)
             {
                 throw new Exception("ApiKey is not valid.");
             }
-*/
+
             var jsonArray = json["daily"].Take(7);
 
             // lambda expression
