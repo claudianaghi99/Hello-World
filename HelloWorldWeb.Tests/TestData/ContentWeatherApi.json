@@ -1,0 +1,76 @@
+{
+  "lat": 46.77,
+  "lon": 23.58,
+  "timezone": "Europe / Bucharest",
+  "timezone_offset": 10800,
+  "current": {
+    "dt": 1628757598,
+    "sunrise": 1628738379,
+    "sunset": 1628790117,
+    "temp": 296.93,
+    "feels_like": 296.93,
+    "pressure": 1020,
+    "humidity": 60,
+    "dew_point": 288.71,
+    "uvi": 6.05,
+    "clouds": 20,
+    "visibility": 10000,
+    "wind_speed": 4.12,
+    "wind_deg": 300,
+    "weather": [
+      {
+        "id": 801,
+        "main": "Clouds",
+        "description": "few clouds",
+        "icon": "02d"
+      }
+    ]
+  },
+  "daily": [
+    {
+      "dt": 1628762400,
+      "sunrise": 1628738379,
+      "sunset": 1628790117,
+      "moonrise": 1628753220,
+      "moonset": 1628797740,
+      "moon_phase": 0.13,
+      "temp": {
+        "day": 297.41,
+        "min": 290.15,
+        "max": 300.46,
+        "night": 290.78,
+        "eve": 298.34,
+        "morn": 290.2
+      },
+      "feels_like": {
+        "day": 297.33,
+        "night": 289.93,
+        "eve": 297.96,
+        "morn": 289.79
+      },
+      "pressure": 1020,
+      "humidity": 55,
+      "dew_point": 287.8,
+      "wind_speed": 4.82,
+      "wind_deg": 318,
+      "wind_gust": 6.71,
+      "weather": [
+        {
+          "id": 801,
+          "main": "Clouds",
+          "description": "few clouds",
+          "icon": "02d"
+        }
+      ],
+      "clouds": 19,
+      "pop": 0,
+      "uvi": 6.81
+    },
+    {
+      "dt": 1628848800,
+      "sunrise": 1628824856,
+      "sunset": 1628876420,
+      "moonrise": 1628844180,
+      "moonset": 1628885400,
+      "moon_phase": 0.1
+    }
