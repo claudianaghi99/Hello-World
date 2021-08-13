@@ -18,6 +18,15 @@ namespace HelloWorldWebApp.Controllers
         private readonly string latitude = "46.7700";
         private readonly string apiKey = "02d7a76352ce38d0cc90b1e68df3c81a";
 
+        public WeatherController(IWeatherControllerSettings conf)
+        {
+            longitude = conf.Longitude;
+            latitude = conf.Latitude;
+            apiKey = conf.ApiKey;
+        }
+
+        public const float KELVIN_CONST = 273.15f;
+
         // GET: api/<WeatherController>
         [HttpGet]
         public IEnumerable<DailyWeatherRecord> Get()
@@ -42,12 +51,12 @@ namespace HelloWorldWebApp.Controllers
             long unixDateTime = item.Value<long>("dt");
             var day = DateTimeOffset.FromUnixTimeSeconds(unixDateTime).DateTime.Date;
 
-            float temp = item.SelectToken("temp").Value<float>("day");
+            float temp = item.SelectToken("temp").Value<float>("day")-273.15f;
             // dailyWeatherRecord.Temperature = this.ConvertKelvintoCelsius(temp);
 
             string weather = item.SelectToken("weather")[0].Value<string>("description");
             var type = this.Convert(weather);
-            DailyWeatherRecord dailyWeatherRecord = new DailyWeatherRecord(day, this.ConvertKelvintoCelsius(temp), type);
+            DailyWeatherRecord dailyWeatherRecord = new DailyWeatherRecord(day, temp, type);
             return dailyWeatherRecord;
         }
 
@@ -73,6 +82,11 @@ namespace HelloWorldWebApp.Controllers
                 default:
                     throw new Exception($"Unknown weather type {weather}.");
             }
+        }
+
+        public float ConvertKelvintoCelsius(float kelvin)
+        {
+            return kelvin - KELVIN_CONST;
         }
     }
 }
