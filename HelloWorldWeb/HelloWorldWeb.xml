@@ -9,5 +9,11 @@
             fetch data from weather API.
             </summary>
         </member>
+        <member name="M:HelloWorldWebApp.Controllers.WeatherController.#ctor(HelloWorldWebApp.Controllers.IWeatherControllerSettings)">
+            <summary>
+            Initializes a new instance of the <see cref="T:HelloWorldWebApp.Controllers.WeatherController"/> class.
+            </summary>
+            <param name="conf"></param>
+        </member>
     </members>
 </doc>

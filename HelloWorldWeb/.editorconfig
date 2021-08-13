@@ -5,5 +5,8 @@ dotnet_analyzer_diagnostic.category-StyleCop.CSharp.DocumentationRules.severity 
 dotnet_diagnostic.SA1603.severity=warning
 dotnet_diagnostic.SA0001.severity=warning
 
+# CS1591: Missing XML comment for publicly visible type or member
+dotnet_diagnostic.CS1591.severity = none
+
 [*.{cs,vb}]
 dotnet_diagnostic.CA3009.severity=warning

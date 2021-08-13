@@ -17,18 +17,21 @@ namespace HelloWorldWebApp.Controllers
     [ApiController]
     public class WeatherController : ControllerBase
     {
+        public const float KELVINCONST = 273.15f;
         private readonly string longitude = "23.5800";
         private readonly string latitude = "46.7700";
         private readonly string apiKey = "02d7a76352ce38d0cc90b1e68df3c81a";
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="WeatherController"/> class.
+        /// </summary>
+        /// <param name="conf"></param>
         public WeatherController(IWeatherControllerSettings conf)
         {
-            longitude = conf.Longitude;
-            latitude = conf.Latitude;
-            apiKey = conf.ApiKey;
+            this.longitude = conf.Longitude;
+            this.latitude = conf.Latitude;
+            this.apiKey = conf.ApiKey;
         }
-
-        public const float KELVIN_CONST = 273.15f;
 
         // GET: api/<WeatherController>
         [HttpGet]
@@ -55,21 +58,7 @@ namespace HelloWorldWebApp.Controllers
 
             // lambda expression
             // result.AddRange(jsonArray.Select(item => CreateDailyWeatherFromJToken(item)));
-            return jsonArray.Select(CreateDailyWeatherRecordFromJToken);
-        }
-
-        private DailyWeatherRecord CreateDailyWeatherRecordFromJToken(JToken item)
-        {
-            long unixDateTime = item.Value<long>("dt");
-            var day = DateTimeOffset.FromUnixTimeSeconds(unixDateTime).DateTime.Date;
-
-            float temp = item.SelectToken("temp").Value<float>("day")-273.15f;
-            // dailyWeatherRecord.Temperature = this.ConvertKelvintoCelsius(temp);
-
-            string weather = item.SelectToken("weather")[0].Value<string>("description");
-            var type = this.Convert(weather);
-            DailyWeatherRecord dailyWeatherRecord = new DailyWeatherRecord(day, temp, type);
-            return dailyWeatherRecord;
+            return jsonArray.Select(this.CreateDailyWeatherRecordFromJToken);
         }
 
         // GET api/<WeatherController>/5
@@ -77,6 +66,25 @@ namespace HelloWorldWebApp.Controllers
         public string Get(int id)
         {
             return "value";
+        }
+
+        public float ConvertKelvintoCelsius(float kelvin)
+        {
+            return kelvin - KELVINCONST;
+        }
+
+        private DailyWeatherRecord CreateDailyWeatherRecordFromJToken(JToken item)
+        {
+            long unixDateTime = item.Value<long>("dt");
+            var day = DateTimeOffset.FromUnixTimeSeconds(unixDateTime).DateTime.Date;
+
+            float temp = item.SelectToken("temp").Value<float>("day") - 273.15f;
+
+            // dailyWeatherRecord.Temperature = this.ConvertKelvintoCelsius(temp);
+            string weather = item.SelectToken("weather")[0].Value<string>("description");
+            var type = this.Convert(weather);
+            DailyWeatherRecord dailyWeatherRecord = new DailyWeatherRecord(day, temp, type);
+            return dailyWeatherRecord;
         }
 
         private WeatherType Convert(string weather)
@@ -108,11 +116,6 @@ namespace HelloWorldWebApp.Controllers
                 default:
                     throw new Exception($"Unknown weather type {weather}.");
             }
-        }
-
-        public float ConvertKelvintoCelsius(float kelvin)
-        {
-            return kelvin - KELVIN_CONST;
         }
     }
 }
