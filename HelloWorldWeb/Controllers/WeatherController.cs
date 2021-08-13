@@ -74,11 +74,5 @@ namespace HelloWorldWebApp.Controllers
                     throw new Exception($"Unknown weather type {weather}.");
             }
         }
-
-        private float ConvertKelvintoCelsius(float kelvin)
-        {
-            float celsius = kelvin - 273.15f;
-            return celsius;
-        }
     }
 }
