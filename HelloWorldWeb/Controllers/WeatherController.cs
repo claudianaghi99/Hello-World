@@ -35,15 +35,8 @@ namespace HelloWorldWebApp.Controllers
             var json = JObject.Parse(content);
 
             List<DailyWeatherRecord> result = new List<DailyWeatherRecord>();
-
             var jsonArray = json["daily"].Take(7);
-
-            foreach (var item in jsonArray)
-            {
-                DailyWeatherRecord dailyWeatherRecord = CreateDailyWeatherRecordFromJToken(item);
-                result.Add(dailyWeatherRecord);
-            }
-
+            result.AddRange(jsonArray.Select(CreateDailyWeatherRecordFromJToken));
             return result;
         }
 
@@ -57,7 +50,7 @@ namespace HelloWorldWebApp.Controllers
 
             string weather = item.SelectToken("weather")[0].Value<string>("description");
             var type = this.Convert(weather);
-            DailyWeatherRecord dailyWeatherRecord = new DailyWeatherRecord(day, temp, type);
+            DailyWeatherRecord dailyWeatherRecord = new DailyWeatherRecord(day, ConvertKelvintoCelsius(temp), type);
             return dailyWeatherRecord;
         }
 
