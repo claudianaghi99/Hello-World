@@ -62,12 +62,19 @@ namespace HelloWorldWebApp.Controllers
             return jsonArray.Select(this.CreateDailyWeatherRecordFromJToken);
         }
 
+        /// <summary>
+        /// Get a weather forecast for the day in specified amount of days from now.
+        /// </summary>
+        /// <param name="id">Amount of days from now (from 0 to 7).</param>
+        /// <returns>The weather forecast.</returns>
         // GET api/<WeatherController>/5
         [HttpGet("{id}")]
         public string Get(int id)
         {
             return "value";
         }
+
+
         [NonAction]
         public float ConvertKelvintoCelsius(float kelvin)
         {
