@@ -12,6 +12,9 @@ namespace HelloWorldWebApp.Controllers
 {
     /// <summary>
     /// fetch data from weather API.
+    /// <see cref="href="https://openweathermap.org/api">
+    /// Weather API
+    /// </see>
     /// </summary>
     [Route("api/[controller]")]
     [ApiController]
