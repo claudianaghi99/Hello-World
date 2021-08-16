@@ -1,18 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using HelloWorldWeb.Models;
-using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json.Linq;
-using RestSharp;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+﻿// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 namespace HelloWorldWebApp.Controllers
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using HelloWorldWeb.Models;
+    using Microsoft.AspNetCore.Mvc;
+    using Newtonsoft.Json.Linq;
+    using RestSharp;
+
     /// <summary>
     /// fetch data from weather API.
-    /// <see cref="href="https://openweathermap.org/api">
+    /// <see href="https://openweathermap.org/api">
     /// Weather API
     /// </see>
     /// </summary>
@@ -76,7 +76,6 @@ namespace HelloWorldWebApp.Controllers
         {
             return "value";
         }
-
 
         [NonAction]
         public float ConvertKelvintoCelsius(float kelvin)

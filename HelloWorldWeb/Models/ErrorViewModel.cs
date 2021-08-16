@@ -2,8 +2,6 @@
 // Copyright (c) Principal33. All rights reserved.
 // </copyright>
 
-using System;
-
 namespace HelloWorldWeb.Models
 {
     public class ErrorViewModel

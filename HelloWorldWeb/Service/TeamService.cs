@@ -1,14 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using HelloWorldWeb.Models;
-
-namespace HelloWorldWeb.Services
+﻿namespace HelloWorldWeb.Services
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using HelloWorldWeb.Models;
+
     public class TeamService : ITeamService
     {
         private readonly TeamInfo teamInfo;
+
         private readonly ITimeService timeService;
 
         public TeamService()

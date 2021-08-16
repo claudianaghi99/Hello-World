@@ -1,8 +1,8 @@
-﻿using System;
-using HelloWorldWeb.Services;
-
-namespace HelloWorldWeb.Models
+﻿namespace HelloWorldWeb.Models
 {
+    using System;
+    using HelloWorldWeb.Services;
+
     public class TeamMember
     {
         private static int idCount = 0;
