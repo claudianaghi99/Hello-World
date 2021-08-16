@@ -45,6 +45,7 @@ namespace HelloWorldWebApp.Controllers
             return this.ConvertResponseToWeatherForecastList(response.Content);
         }
 
+        [NonAction]
         public IEnumerable<DailyWeatherRecord> ConvertResponseToWeatherForecastList(string content)
         {
             var json = JObject.Parse(content);
@@ -67,7 +68,7 @@ namespace HelloWorldWebApp.Controllers
         {
             return "value";
         }
-
+        [NonAction]
         public float ConvertKelvintoCelsius(float kelvin)
         {
             return kelvin - KELVINCONST;
@@ -113,6 +114,8 @@ namespace HelloWorldWebApp.Controllers
                     return WeatherType.FewClouds;
                 case "broken clouds":
                     return WeatherType.BrokenClouds;
+                case "overcast clouds":
+                    return WeatherType.OvercastClouds;
                 default:
                     throw new Exception($"Unknown weather type {weather}.");
             }

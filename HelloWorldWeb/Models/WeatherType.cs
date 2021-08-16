@@ -22,5 +22,6 @@
         Mist,
         Fog,
         ClearSky,
+        OvercastClouds,
     }
 }
