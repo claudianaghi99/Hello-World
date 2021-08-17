@@ -1,15 +1,14 @@
-﻿namespace HelloWorldWeb.Services
-{
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading.Tasks;
-    using HelloWorldWeb.Models;
+﻿using HelloWorldWeb.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
+namespace HelloWorldWeb.Services
+{
     public class TeamService : ITeamService
     {
         private readonly TeamInfo teamInfo;
-        private ITimeService timeService;
 
         public TeamService()
         {
@@ -46,7 +45,7 @@
 
         public int AddTeamMember(string name)
         {
-            TeamMember member = new TeamMember(name, timeService);
+            TeamMember member = new TeamMember() { Name = name }; ;
             this.teamInfo.TeamMembers.Add(member);
             return member.Id;
         }

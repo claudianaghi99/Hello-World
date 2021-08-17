@@ -1,7 +1,7 @@
-﻿namespace HelloWorldWeb.Services
-{
-    using HelloWorldWeb.Models;
+﻿using HelloWorldWeb.Models;
 
+namespace HelloWorldWeb.Services
+{
     public interface ITeamService
     {
         int AddTeamMember(string name);

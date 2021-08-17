@@ -3,17 +3,16 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31515.178
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hello World", "HelloWorld.Console\Hello World.csproj", "{0C39A528-E98D-4F66-8DEF-09F9AE9A9313}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hello World", "HelloWorld.Console\Hello World.csproj", "{8BB342FF-267B-4235-BCFB-5C84D3FDC08F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HelloWorldWeb", "HelloWorldWeb\HelloWorldWeb.csproj", "{AD4FB6DB-2351-415B-947C-1BE7DCC2796C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HelloWorldWeb", "HelloWorldWeb\HelloWorldWeb.csproj", "{5E041A65-BFE3-4C8A-8C1C-7F3A22F973DB}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{072AEAE2-D2EF-4296-977C-8F8A97306A42}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9827177E-C331-44B4-92B2-C961D960CBF8}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
-		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HelloWorldWeb.Tests", "HelloWorldWeb.Tests\HelloWorldWeb.Tests.csproj", "{29478164-5442-4B5A-BF12-0D64BEB85AD4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HelloWorldWeb.Tests", "HelloWorldWeb.Tests\HelloWorldWeb.Tests.csproj", "{C5E05952-4FB7-4EEC-B1D6-67B2B6F49C1D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,23 +20,23 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{0C39A528-E98D-4F66-8DEF-09F9AE9A9313}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0C39A528-E98D-4F66-8DEF-09F9AE9A9313}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0C39A528-E98D-4F66-8DEF-09F9AE9A9313}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0C39A528-E98D-4F66-8DEF-09F9AE9A9313}.Release|Any CPU.Build.0 = Release|Any CPU
-		{AD4FB6DB-2351-415B-947C-1BE7DCC2796C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AD4FB6DB-2351-415B-947C-1BE7DCC2796C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AD4FB6DB-2351-415B-947C-1BE7DCC2796C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AD4FB6DB-2351-415B-947C-1BE7DCC2796C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{29478164-5442-4B5A-BF12-0D64BEB85AD4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{29478164-5442-4B5A-BF12-0D64BEB85AD4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{29478164-5442-4B5A-BF12-0D64BEB85AD4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{29478164-5442-4B5A-BF12-0D64BEB85AD4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8BB342FF-267B-4235-BCFB-5C84D3FDC08F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8BB342FF-267B-4235-BCFB-5C84D3FDC08F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8BB342FF-267B-4235-BCFB-5C84D3FDC08F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8BB342FF-267B-4235-BCFB-5C84D3FDC08F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5E041A65-BFE3-4C8A-8C1C-7F3A22F973DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5E041A65-BFE3-4C8A-8C1C-7F3A22F973DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5E041A65-BFE3-4C8A-8C1C-7F3A22F973DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5E041A65-BFE3-4C8A-8C1C-7F3A22F973DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C5E05952-4FB7-4EEC-B1D6-67B2B6F49C1D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C5E05952-4FB7-4EEC-B1D6-67B2B6F49C1D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C5E05952-4FB7-4EEC-B1D6-67B2B6F49C1D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C5E05952-4FB7-4EEC-B1D6-67B2B6F49C1D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {FB203CFE-9CB2-4691-A374-8977A83F71C0}
+		SolutionGuid = {BAC2AC5C-7EAC-4108-8CA9-70EDBDBB7F82}
 	EndGlobalSection
 EndGlobal

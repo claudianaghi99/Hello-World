@@ -2,29 +2,27 @@
 // Copyright (c) Principal33. All rights reserved.
 // </copyright>
 
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using System.Threading.Tasks;
+using HelloWorldWeb.Models;
+using HelloWorldWeb.Services;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+
 namespace HelloWorldWeb.Controllers
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Diagnostics;
-    using System.Linq;
-    using System.Threading.Tasks;
-    using HelloWorldWeb.Models;
-    using HelloWorldWeb.Services;
-    using Microsoft.AspNetCore.Mvc;
-    using Microsoft.Extensions.Logging;
-
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> logger;
         private readonly ITeamService teamService;
-        private readonly ITimeService timeService;
 
-        public HomeController(ILogger<HomeController> logger, ITeamService teamService, ITimeService timeService)
+        public HomeController(ILogger<HomeController> logger, ITeamService teamService)
         {
             this.logger = logger;
             this.teamService = teamService;
-            this.timeService = timeService;
         }
 
         [HttpGet]
