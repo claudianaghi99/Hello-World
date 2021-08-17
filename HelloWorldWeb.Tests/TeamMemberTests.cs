@@ -18,7 +18,7 @@ namespace HelloWorldWeb.Tests
         {
             timeMock = new Mock<ITimeService>();
             timeMock.Setup(_ => _.Now()).Returns(new DateTime(2021, 8, 12));
-
+            
         }
 
         [Fact]
@@ -50,14 +50,14 @@ namespace HelloWorldWeb.Tests
             //Assert
             Assert.Equal(teamMember.Id + 1, nextId);
         }
-        [Fact]
+            [Fact]
         public void GettingAge()
         {
             // Assume
             InitializeTimeSeriviceMock();
             var timeService = timeMock.Object;
-            TeamMember newMember = new TeamMember("Andreea", timeService);
-            newMember.Birthdate = new DateTime(2000, 1, 1);
+            TeamMember newMember = new TeamMember("Andreea",timeService);
+            newMember.Birthdate =  new DateTime(2000, 1, 1);
 
             // Act
             int calculatedAge = newMember.GetAge();
@@ -65,7 +65,7 @@ namespace HelloWorldWeb.Tests
             // Assert
             timeMock.Verify(library => library.Now(), Times.AtMostOnce());
             Assert.Equal(21, calculatedAge);
-
+            
         }
 
     }

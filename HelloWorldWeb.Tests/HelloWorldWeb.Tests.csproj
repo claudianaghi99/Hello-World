@@ -1,10 +1,18 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
 
     <IsPackable>false</IsPackable>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="ContentForWeatherAPI.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="TestData\ContentForWeatherAPI.json" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.9.4" />
@@ -19,15 +27,7 @@
     </PackageReference>
   </ItemGroup>
 
-	<ItemGroup>
-		<None Remove="ContentWeatherApi.json" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<EmbeddedResource Include="TestData\ContentWeatherApi.json" />
-	</ItemGroup>
-	
-	<ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\HelloWorldWeb\HelloWorldWeb.csproj" />
   </ItemGroup>
 

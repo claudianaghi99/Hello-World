@@ -20,32 +20,28 @@ namespace HelloWorldWebApp.Controllers
     [ApiController]
     public class WeatherController : ControllerBase
     {
-        public const float KELVINCONST = 273.15f;
         private readonly string longitude = "23.5800";
         private readonly string latitude = "46.7700";
-        private readonly string apiKey = "02d7a76352ce38d0cc90b1e68df3c81a";
+        private readonly string apiKey = "c969b66bb3c8e3fe32d4485a1623f42c";
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="WeatherController"/> class.
-        /// </summary>
-        /// <param name="conf"></param>
         public WeatherController(IWeatherControllerSettings conf)
         {
-            this.longitude = conf.Longitude;
-            this.latitude = conf.Latitude;
-            this.apiKey = conf.ApiKey;
+            longitude = conf.Longitude;
+            latitude = conf.Latitude;
+            apiKey = conf.ApiKey;
         }
+
 
         // GET: api/<WeatherController>
         [HttpGet]
         public IEnumerable<DailyWeatherRecord> Get()
         {
             // https://api.openweathermap.org/data/2.5/onecall?lat=46.7700&lon=23.5800&exclude=hourly,minutely&appid=c969b66bb3c8e3fe32d4485a1623f42c
-            var client = new RestClient($"https://api.openweathermap.org/data/2.5/onecall?lat={this.latitude}&lon={this.longitude}&exclude=hourly,minutely&appid={this.apiKey}");
+            var client = new RestClient($"https://api.openweathermap.org/data/2.5/onecall?lat={latitude}&lon={longitude}&exclude=hourly,minutely&appid={apiKey}");
             client.Timeout = -1;
             var request = new RestRequest(Method.GET);
             IRestResponse response = client.Execute(request);
-            return this.ConvertResponseToWeatherForecastList(response.Content);
+            return ConvertResponseToWeatherForecastList(response.Content);
         }
 
         [NonAction]
@@ -55,49 +51,29 @@ namespace HelloWorldWebApp.Controllers
 
             if (json["daily"] == null)
             {
-                throw new Exception("ApiKey is not valid.");
+                throw new Exception("apiKey is not valid.");
             }
 
             var jsonArray = json["daily"].Take(7);
 
             // lambda expression
             // result.AddRange(jsonArray.Select(item => CreateDailyWeatherFromJToken(item)));
-            return jsonArray.Select(this.CreateDailyWeatherRecordFromJToken);
+            return jsonArray.Select(CreateDailyWeatherFromJToken);
         }
 
-        /// <summary>
-        /// Get a weather forecast for the day in specified amount of days from now.
-        /// </summary>
-        /// <param name="id">Amount of days from now (from 0 to 7).</param>
-        /// <returns>The weather forecast.</returns>
-        // GET api/<WeatherController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
-
-        [NonAction]
-        public float ConvertKelvintoCelsius(float kelvin)
-        {
-            return kelvin - KELVINCONST;
-        }
-
-        private DailyWeatherRecord CreateDailyWeatherRecordFromJToken(JToken item)
+        private DailyWeatherRecord CreateDailyWeatherFromJToken(JToken item)
         {
             long unixDateTime = item.Value<long>("dt");
-            var day = DateTimeOffset.FromUnixTimeSeconds(unixDateTime).DateTime.Date;
-
-            float temp = item.SelectToken("temp").Value<float>("day") - 273.15f;
-
-            // dailyWeatherRecord.Temperature = this.ConvertKelvintoCelsius(temp);
+            var day = DateTimeOffset.FromUnixTimeSeconds(unixDateTime).Date;
+            float temp = item.SelectToken("temp").Value<float>("day");
             string weather = item.SelectToken("weather")[0].Value<string>("description");
-            var type = this.Convert(weather);
+            var type = ConvertWeatherType(weather);
+
             DailyWeatherRecord dailyWeatherRecord = new DailyWeatherRecord(day, temp, type);
             return dailyWeatherRecord;
         }
 
-        private WeatherType Convert(string weather)
+        private WeatherType ConvertWeatherType(string weather)
         {
             switch (weather)
             {
@@ -128,6 +104,29 @@ namespace HelloWorldWebApp.Controllers
                 default:
                     throw new Exception($"Unknown weather type {weather}.");
             }
+        }
+
+        /// <summary>
+        /// Get a weather forecast for the day in specified amount of days from now.
+        /// </summary>
+        /// <param name="index"> Amount of days from now (from 0 to 7).</param>
+        /// <returns> The weather forecast. </returns>
+        [HttpGet("{index}")]
+        public string Get(int index)
+        {
+            return "value";
+        }
+
+        // POST api/<WeatherController>
+        [HttpPost]
+        public void Post([FromBody] string value)
+        {
+        }
+
+        // PUT api/<WeatherController>/5
+        [HttpPut("{id}")]
+        public void Put(int id, [FromBody] string value)
+        {
         }
     }
 }

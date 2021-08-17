@@ -6,7 +6,7 @@
     <title>@ViewData["Title"] - HelloWorldWeb</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
-    @RenderSection("AdditionalStyles",false)
+    @RenderSection("AdditionalStyles", required: false)
 </head>
 <body>
     <header>
@@ -34,7 +34,8 @@
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
-        @await RenderSectionAsync("ModalWindow",required: false)
+        @await RenderSectionAsync("ModalWindow", required: false)
+
     </div>
 
     <footer class="border-top footer text-muted">

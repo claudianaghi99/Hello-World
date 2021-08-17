@@ -1,4 +1,4 @@
-﻿using HelloWorldWeb.Models;
+using HelloWorldWeb.Models;
 using HelloWorldWeb.Services;
 using System;
 using System.Linq;
@@ -6,11 +6,11 @@ using Xunit;
 
 namespace HelloWorldWeb.Tests
 {
-    public class TeamServiceTests
+    public class TeamServiceTest
     {
-       // private ITimeService timeService;
+        private ITimeService timeService;
         [Fact]
-        public void AddTeamMemberToTheTeam2()
+        public void AddTeamMemberToTheTeam()
         {
             //Assume
             ITeamService teamService = new TeamService();
@@ -23,23 +23,23 @@ namespace HelloWorldWeb.Tests
             Assert.Equal(initialCount + 1, teamService.GetTeamInfo().TeamMembers.Count);
         }
 
-        /*  [Fact]
-        public void RemoveMemberFromTheTeam2()
-         {
-             // Assume
-             ITeamService teamServiceForRemove = new TeamService();
-             int initialCount = teamServiceForRemove.GetTeamInfo().TeamMembers.Count;
-             TeamMember firstMember = teamServiceForRemove.GetTeamInfo().TeamMembers[0];
+        [Fact]
+        public void RemoveMemberFromTheTeam()
+        {
+            // Assume
+            ITeamService teamServiceForRemove = new TeamService();
+            int initialCount = teamServiceForRemove.GetTeamInfo().TeamMembers.Count;
+            TeamMember firstMember = teamServiceForRemove.GetTeamInfo().TeamMembers[0];
 
-             // Act
-             teamServiceForRemove.RemoveMember(firstMember.Id);
+            // Act
+            teamServiceForRemove.RemoveMember(firstMember.Id);
 
-             // Assert
-             Assert.Equal(initialCount - 1, teamServiceForRemove.GetTeamInfo().TeamMembers.Count);
-         }*/
+            // Assert
+            Assert.Equal(initialCount - 1, teamServiceForRemove.GetTeamInfo().TeamMembers.Count);
+        }
 
         [Fact]
-        public void UpdateTeamMember2()
+        public void UpdateTeamMember()
         {
             //Assume
             TeamService teamService = new TeamService();
@@ -47,7 +47,7 @@ namespace HelloWorldWeb.Tests
             int currentId = firstMember.Id;
 
             // Act
-            teamService.UpdateMemberName(currentId, "Alex");
+            teamService.UpdateMemberName(currentId,"Alex");
 
             // Assert
             Assert.Equal("Alex", teamService.GetTeamMemberById(currentId).Name);

@@ -1,7 +1,5 @@
 ﻿$(document).ready(function () {
 
-
-
     $("#createButton").click(function () {
         var newcomerName = $("#nameField").val();
         var length = $("#teamMembers").children().length;
@@ -14,7 +12,7 @@
             success: (result) => {
                 console.log(result);
                 $("#teamList").append(
-                    `<li class="memberName" >
+                    `<li>
                 <span class="memberName" member-id=${result}>
                         ${newcomerName}
                     </span >
@@ -31,28 +29,12 @@
             }
         })
 
-
-
     });
 
-    /*
-    $('#submit').click(function () {
-        const id = $('#editClassmate').attr('member-id');
-        const newName = $('#classmateName').val();
-
-        $.ajax({
-            url: "/Home/UpdateMemberName",
-            method: "POST",
-            data: {
-                memberId: id,
-                name: newName
-            },
-            success: function (result) {
-                location.reload();
-            }
-        })
+    $("#clearButton").click(function ClearFields() {
+        document.getElementById("nameField").value = "";
+        document.getElementById("createButton").disabled = true;
     });
-    */
 
     $("#editClassmate").on("click", "#submit", function () {
         console.log('submit changes to server');
@@ -76,7 +58,6 @@
         console.log('cancel changes');
     })
 
-    /*
     $("#teamList").on("click", ".edit", function () {
         var targetMemberTag = $(this).closest('li');
         var id = targetMemberTag.attr('member-id');
@@ -84,27 +65,8 @@
         $('#editClassmate').attr("member-id", id);
         $('#classmateName').val(currentName);
         $('#editClassmate').modal('show');
-    })
-    */
-
-    $("#teamList").on("click", ".pencil", function () {
-        var targetMemberTag = $(this).closest('li');
-        var id = targetMemberTag.attr('member-id');
-        var currentName = targetMemberTag.find(".memberName").text();
-        $('#editClassmate').attr("member-id", id);
-        $('#classmateName').val(currentName);
-        $('#editClassmate').modal('show');
-    })
-    
+        })
 });
-
-(function () {
-    $("#clearButton").click(function () {
-        document.getElementById("nameField").value = "";
-        document.getElementById("createButton").disabled = true;
-    });
-
-}());
 
 function deleteMember(index) {
 
@@ -130,4 +92,3 @@ function deleteMember(index) {
         }
     });
 }());
-

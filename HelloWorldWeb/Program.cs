@@ -1,7 +1,3 @@
-// <copyright file="Program.cs" company="Principal33">
-// Copyright (c) Principal33. All rights reserved.
-// </copyright>
-
 namespace HelloWorldWeb
 {
     using System;
@@ -20,14 +16,14 @@ namespace HelloWorldWeb
             CreateHostBuilder(args).Build().Run();
         }
 
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    var port = Environment.GetEnvironmentVariable("PORT");
+    public static IHostBuilder CreateHostBuilder(string[] args) =>
+        Host.CreateDefaultBuilder(args)
+        .ConfigureWebHostDefaults(webBuilder =>
+        {
+            var port = Environment.GetEnvironmentVariable("PORT");
 
-                    webBuilder.UseStartup<Startup>()
-                   .UseUrls("http://*:" + port);
-                });
+            webBuilder.UseStartup<Startup>()
+        .UseUrls("http://*:" + port);
+        });
     }
 }

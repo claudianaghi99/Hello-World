@@ -42,18 +42,18 @@ namespace HelloWorldWeb.Controllers
         [HttpDelete]
         public void RemoveMember(int memberIndex)
         {
-            this.teamService.RemoveMember(memberIndex);
+            teamService.RemoveMember(memberIndex);
         }
 
         [HttpPost]
-        public void UpdateMemberName(int memberId, string name)
+        public void UpdateMemberName(int memberId, String name)
         {
-            this.teamService.UpdateMemberName(memberId, name);
+            teamService.UpdateMemberName(memberId, name);
         }
 
         public IActionResult Index()
         {
-            return this.View(this.teamService.GetTeamInfo());
+             return this.View(this.teamService.GetTeamInfo());
         }
 
         public IActionResult Privacy()

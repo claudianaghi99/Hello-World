@@ -3,12 +3,9 @@
 FROM mcr.microsoft.com/dotnet/aspnet:5.0 AS base
 WORKDIR /app
 
-
 FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
 WORKDIR /src
 COPY ["HelloWorldWeb.csproj", "HelloWorldWeb/"]
-
-
 RUN dotnet restore "HelloWorldWeb/HelloWorldWeb.csproj"
 COPY . ./HelloWorldWeb
 WORKDIR "/src/HelloWorldWeb"

@@ -7,15 +7,15 @@
     {
         public WeatherControllerSettings(IConfiguration conf)
         {
-            this.ApiKey = conf["WeatherForecast:ApiKey"];
-            this.Longitude = conf["WeatherForecast:Longitude"];
-            this.Latitude = conf["WeatherForecast:Latitude"];
+            ApiKey = conf["WeatherForecast:ApiKey"];
+            Longitude = conf["WeatherForecast:Longitude"];
+            Latitude = conf["WeatherForecast:Latitude"];
         }
-
-        public string ApiKey { get; set; }
 
         public string Longitude { get; set; }
 
-        public string Latitude { get; set; }
-        }
+        public string Latitude { get; set ; }
+
+        public string ApiKey { get ; set ; }
+    }
 }

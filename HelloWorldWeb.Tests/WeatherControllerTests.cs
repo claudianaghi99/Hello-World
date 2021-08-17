@@ -15,12 +15,12 @@ namespace HelloWorldWeb.Tests
     public class WeatherControllerTests
     {
         [Fact]
-        public void TestCheckingConvertion()
+        public void TestCheckingConversionFromJsonToDailyWeatherRecord()
         {
             // Assume
             string content = LoadJsonFromResource();
-            var weatherControllerSettingsMock = new Mock<IWeatherControllerSettings>();
-            WeatherController weatherController = new WeatherController(weatherControllerSettingsMock.Object);
+            var WeatherControllerSettingsMock = new Mock<IWeatherControllerSettings>();
+            WeatherController weatherController = new WeatherController(WeatherControllerSettingsMock.Object);
 
             // Act
             var result = weatherController.ConvertResponseToWeatherForecastList(content);
@@ -30,7 +30,7 @@ namespace HelloWorldWeb.Tests
             var firstDay = result.First();
 
             Assert.Equal(new DateTime(2021, 8, 12), firstDay.Date);
-            Assert.Equal(24.260009765625, firstDay.Temperature);
+            Assert.Equal(24.26f, firstDay.Temperature);
             Assert.Equal(WeatherType.FewClouds, firstDay.Type);
         }
 
@@ -38,7 +38,7 @@ namespace HelloWorldWeb.Tests
         {
             var assembly = this.GetType().Assembly;
             var assemblyName = assembly.GetName().Name;
-            var resourceName = $"{assemblyName}.TestData.ContentWeatherApi.json";
+            var resourceName = $"{assemblyName}.TestData.ContentForWeatherAPI.json";
             var resourceStream = assembly.GetManifestResourceStream(resourceName);
             using (var tr = new StreamReader(resourceStream))
             {
