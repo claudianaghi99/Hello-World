@@ -3,7 +3,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace HelloWorldWeb.Migrations
 {
-    public partial class AddTeamMembers : Migration
+    public partial class AddTeamMember : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

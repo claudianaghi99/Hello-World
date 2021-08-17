@@ -10,8 +10,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace HelloWorldWeb.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210817160209_AddTeamMembers")]
-    partial class AddTeamMembers
+    [Migration("20210817172124_AddTeamMember")]
+    partial class AddTeamMember
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -37,6 +37,21 @@ namespace HelloWorldWeb.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Skill");
+                });
+
+            modelBuilder.Entity("HelloWorldWeb.Models.TeamMember", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("Name")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TeamMembers");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
