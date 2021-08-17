@@ -1,13 +1,15 @@
 ﻿@model TeamInfo
-@{
-    ViewData["Title"] = "Home Page";
-}
-@section scripts {
+
+@{ ViewData["Title"] = "Home Page"; }
+
+@section scripts{
     <script type="text/javascript" src="~/js/Index.js"></script>
 }
-@section AdditionalStyles {
+
+@section AdditionalStyles{
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 }
+
 @section ModalWindow {
     <!-- Modal -->
     <div class="modal fade" id="editClassmate" role="dialog">
@@ -36,24 +38,26 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">Our Team</h1>
+    <h1 class="display-4">Team 3</h1>
     <ul id="teamList">
         @for (var i = 0; i < Model.TeamMembers.Count; i++)
         {
             var member = Model.TeamMembers[i];
 
             <li class="member" member-id="@member.Id">
-                <span class="name">@member.Name</span>
-                <span class="delete fa fa-remove" onclick="deleteMember(@member.Id)"></span>
-                <span class="pencil fa fa-pencil"></span>
+                <span class="memberName">
+                    @member.Name
+                </span>
+                <span class="delete fa fa-remove" onclick="deleteMember(@member.Id)">
+                </span>
+                <span class="edit fa fa-pencil">
+                </span>
             </li>
-
-            }
-        </ul>
+        }
+    </ul>
     <input type="text" id="nameField" title="e.g Claudia" />
-    <button class="btn-primary" id="createButton" title="Create">Create</button>
-    <button class="btn-primary" id="clearButton" title="Clear">Clear</button>
-
+    <button class="btn btn-primary" id="createButton" disabled=true title="Create">Create</button>
+    <button class="btn btn-primary" id="clearButton" title="Clear">Clear</button>
 
 
 </div>

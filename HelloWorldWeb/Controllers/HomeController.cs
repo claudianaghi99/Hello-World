@@ -1,14 +1,18 @@
-﻿// <copyright file="HomeController.cs" company="Principal 33">
-// Copyright (c) Principal 33. All rights reserved.
+﻿// <copyright file="HomeController.cs" company="Principal33">
+// Copyright (c) Principal33. All rights reserved.
 // </copyright>
 
+using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
+using System.Threading.Tasks;
 using HelloWorldWeb.Models;
 using HelloWorldWeb.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
-namespace HelloWorldWebApp.Controllers
+namespace HelloWorldWeb.Controllers
 {
     public class HomeController : Controller
     {
@@ -21,18 +25,6 @@ namespace HelloWorldWebApp.Controllers
             this.teamService = teamService;
         }
 
-        [HttpPost]
-        public void AddTeamMember(string teamMember)
-        {
-            this.teamService.AddTeamMember(teamMember);
-        }
-
-        [HttpDelete]
-        public void RemoveMember(int memberIndex)
-        {
-            this.teamService.RemoveMember(memberIndex);
-        }
-
         [HttpGet]
         public int GetCount()
         {
@@ -40,9 +32,21 @@ namespace HelloWorldWebApp.Controllers
         }
 
         [HttpPost]
-        public void UpdateMemberName(int memberId, string name)
+        public int AddTeamMember(string name)
         {
-            this.teamService.UpdateMemberName(memberId, name);
+            return this.teamService.AddTeamMember(name);
+        }
+
+        [HttpDelete]
+        public void RemoveMember(int memberIndex)
+        {
+            teamService.RemoveMember(memberIndex);
+        }
+
+        [HttpPost]
+        public void UpdateMemberName(int memberId, String name)
+        {
+            teamService.UpdateMemberName(memberId, name);
         }
 
         public IActionResult Index()

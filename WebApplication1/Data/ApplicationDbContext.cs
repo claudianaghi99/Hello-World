@@ -12,5 +12,7 @@ namespace WebApplication1.Data
             : base(options)
         {
         }
+
+        public object Skill { get; set; }
     }
 }
