@@ -1,7 +1,5 @@
 ﻿$(document).ready(function () {
 
-
-
     $("#createButton").click(function () {
         var newcomerName = $("#nameField").val();
         var length = $("#teamMembers").children().length;
@@ -14,11 +12,11 @@
             success: (result) => {
                 console.log(result);
                 $("#teamList").append(
-                    `<li class="member" member-id=${result}>
-                <span class="memberName">
+                    `<li>
+                <span class="memberName" member-id=${result}>
                         ${newcomerName}
                     </span >
-                <span class="delete fa fa-remove" onclick="deleteMember(${length})">
+                <span class="delete fa fa-remove" onclick="deleteMember(${result})">
                     </span>
                 <span class="edit fa fa-pencil">
                     </span>
@@ -31,13 +29,18 @@
             }
         })
 
-
-
     });
-    $('#submit').click(function () {
-        const id = $('#editClassmate').attr('member-id');
-        const newName = $('#classmateName').val();
 
+    $("#clearButton").click(function ClearFields() {
+        document.getElementById("nameField").value = "";
+        document.getElementById("createButton").disabled = true;
+    });
+
+    $("#editClassmate").on("click", "#submit", function () {
+        console.log('submit changes to server');
+        const id = $('#editClassmate').attr('member-id');
+        console.log(id);
+        const newName = $('#classmateName').val();
         $.ajax({
             url: "/Home/UpdateMemberName",
             method: "POST",
@@ -49,26 +52,21 @@
                 location.reload();
             }
         })
-    });
+    })
 
-    $("#teamList").on("click", ".pencil", function () {
+    $("#editClassmate").on("click", "#cancel", function () {
+        console.log('cancel changes');
+    })
+
+    $("#teamList").on("click", ".edit", function () {
         var targetMemberTag = $(this).closest('li');
         var id = targetMemberTag.attr('member-id');
-        var currentName = targetMemberTag.find(".name").text();
+        var currentName = targetMemberTag.find(".memberName").text();
         $('#editClassmate').attr("member-id", id);
         $('#classmateName').val(currentName);
         $('#editClassmate').modal('show');
-    })
-
+        })
 });
-
-(function () {
-    $("#clearButton").click(function () {
-        document.getElementById("createButton").disabled = true;
-        document.getElementById("nameField").value = "";
-    });
-
-}());
 
 function deleteMember(index) {
 
@@ -94,4 +92,3 @@ function deleteMember(index) {
         }
     });
 }());
-

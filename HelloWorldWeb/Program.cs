@@ -1,7 +1,3 @@
-// <copyright file="Program.cs" company="Principal33">
-// Copyright (c) Principal33. All rights reserved.
-// </copyright>
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
