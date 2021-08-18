@@ -1,20 +1,20 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using HelloWorldWeb.Data;
-using HelloWorldWeb.Services;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-
 namespace HelloWorldWeb
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using HelloWorldWeb.Data;
+    using HelloWorldWeb.Services;
+    using Microsoft.AspNetCore.Builder;
+    using Microsoft.AspNetCore.Hosting;
+    using Microsoft.AspNetCore.HttpsPolicy;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.EntityFrameworkCore;
+    using Microsoft.Extensions.Configuration;
+    using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.Extensions.Hosting;
+
     public class Startup
     {
         public Startup(IConfiguration configuration)
@@ -23,6 +23,17 @@ namespace HelloWorldWeb
         }
 
         public IConfiguration Configuration { get; }
+
+        public static string ConvertHerokuStringToAspnetString(string herokuConnectionString)
+        {
+            var databaseUri = new Uri(herokuConnectionString);
+            string databaseUriArray = databaseUri.UserInfo;
+
+            var databaseUriUsername = databaseUriArray.Split(":")[0];
+            var databaseUriPassword = databaseUriArray.Split(":")[1];
+            var databaseName = databaseUri.LocalPath.TrimStart('/');
+            return $"Host={databaseUri.Host};Port={databaseUri.Port};Database={databaseName};User Id={databaseUriUsername};Password={databaseUriPassword};Pooling=true;SSL Mode=Require;TrustServerCertificate=True;";
+        }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -69,17 +80,6 @@ namespace HelloWorldWeb
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
-        }
-
-        public static string ConvertHerokuStringToAspnetString(string herokuConnectionString)
-        {
-            var databaseUri = new Uri(herokuConnectionString);
-            string databaseUriArray = databaseUri.UserInfo;
-
-            var databaseUriUsername = databaseUriArray.Split(":")[0];
-            var databaseUriPassword = databaseUriArray.Split(":")[1];
-            var databaseName = databaseUri.LocalPath.TrimStart('/');
-            return $"Host={databaseUri.Host};Port={databaseUri.Port};Database={databaseName};User Id={databaseUriUsername};Password={databaseUriPassword};Pooling=true;SSL Mode=Require;TrustServerCertificate=True;";
         }
     }
 }

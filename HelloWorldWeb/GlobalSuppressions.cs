@@ -5,4 +5,6 @@
 
 using System.Diagnostics.CodeAnalysis;
 
+#pragma warning disable SA1404 // Code analysis suppression should have justification
 [assembly: SuppressMessage("StyleCop.CSharp.OrderingRules", "SA1208:System using directives should be placed before other using directives", Justification = "<Pending>")]
+#pragma warning restore SA1404 // Code analysis suppression should have justification
