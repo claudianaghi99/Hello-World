@@ -3,6 +3,8 @@
     using System;
     using HelloWorldWeb.Services;
 
+    [DebuggerDisplay("{Name}[{Id}]")]
+
     public class TeamMember
     {
         private static int idCount = 0;
