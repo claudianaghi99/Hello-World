@@ -35,26 +35,32 @@ namespace CSharpFeatures_C
 
         static Coffe MakeCoffe(string grains, string milk, string water, string sugar, Func<string, string, string, string, Coffe> recipe)
         {
+            Coffe coffe = null;
             try
             {
                 Console.WriteLine("Start preparing coffee.");
-                var coffe = recipe(grains, milk, water, sugar);
-                return coffe;
+                coffe = recipe(grains, milk, water, sugar);
             }
-            catch
+            catch(RecipeUnavailbleException e)
             {
-                Console.WriteLine("Something went wrong.");
-                return null;
+                Console.WriteLine(e.Message);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"Something went wrong, see exception details: {e.Message}");
             }
             finally
             {
                 Console.WriteLine("Finished.");
             }
+            return coffe;
+
         }
 
         static Coffe Espresso(string grains, string milk, string water, string sugar)
         {
-            throw new RecipeUnavailbleException();
+            throw new ApplicationException();
+            return new Coffe("Espresso");
         }
 
         static Coffe FlatWhite(string grains, string milk, string water, string sugar)
