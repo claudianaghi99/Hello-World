@@ -8,6 +8,7 @@ namespace CSharpFeatures_C
     {
         static async System.Threading.Tasks.Task Main(string[] args)
         {
+            /*
             TeamMember teamMember = new TeamMember() {Name="Member1"};
             string jsonString = JsonSerializer.Serialize(teamMember);
             Console.WriteLine(jsonString);
@@ -17,8 +18,12 @@ namespace CSharpFeatures_C
             var expectedOutput = readText.Result;
             var teamMemberDesearialized = JsonSerializer.Deserialize<TeamMember>(expectedOutput);
             Console.WriteLine(teamMemberDesearialized);
-
-            Coffe coffe = MakeCoffe("grain", "milk", "water", "sugar", Espresso);
+            */
+            Console.Write("What would you like?");
+            var customerInput = Console.ReadLine();
+           
+            Func<string, string, string, string, Coffe> recipe = customerInput == "FlatWhite" ? FlatWhite : Espresso;
+            Coffe coffe = MakeCoffe("grain", "milk", "water", "sugar", FlatWhite);
             Console.WriteLine($"Here is your coffee:{coffe}.");
         }
 
@@ -43,6 +48,11 @@ namespace CSharpFeatures_C
         static Coffe Espresso(string grains, string milk, string water, string sugar)
         {
             return new Coffe("Espresso");
+        }
+
+        static Coffe FlatWhite(string grains, string milk, string water, string sugar)
+        {
+            return new Coffe("FlatWhite");
         }
     }
 
