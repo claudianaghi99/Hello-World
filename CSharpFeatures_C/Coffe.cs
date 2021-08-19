@@ -2,7 +2,7 @@
 {
     internal class Coffe
     {
-        public string CoffeType { get; set; }
+        
         public Coffe()
         {
         }
@@ -10,6 +10,8 @@
         {
             CoffeType = type;
         }
+        public string CoffeType { get; }
+
 
         public override string ToString()
         {

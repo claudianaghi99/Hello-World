@@ -23,7 +23,7 @@ namespace CSharpFeatures_C
             var customerInput = Console.ReadLine();
            
             Func<string, string, string, string, Coffe> recipe = customerInput == "FlatWhite" ? FlatWhite : Espresso;
-            Coffe coffe = MakeCoffe("grain", "milk", "water", "sugar", FlatWhite);
+            Coffe coffe = MakeCoffe("grain", "milk", "water", "sugar", recipe);
             Console.WriteLine($"Here is your coffee:{coffe}.");
         }
 
