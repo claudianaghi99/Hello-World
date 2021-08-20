@@ -1,5 +1,20 @@
 ﻿$(document).ready(function () {
 
+    var connection = new signalR.HubConnectionBuilder().withUrl("/messagehub").build();
+
+
+    connection.on("NewTeamMemberAdded", function (name, member.Id) {
+        console.log(`New team member added: ${JSON.stringify(name, null, 2)}, ${member.Id}.`)
+
+    });
+
+    connection.start().then(function () {
+        console.log('Connection Started')
+
+    }).catch(function (err) {
+        return console.error(err.toString());
+    });
+
     $("#createButton").click(function () {
         var newcomerName = $("#nameField").val();
         var length = $("#teamMembers").children().length;

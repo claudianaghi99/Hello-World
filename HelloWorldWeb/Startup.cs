@@ -31,7 +31,7 @@ namespace HelloWorldWeb
         {
             services.AddControllersWithViews();
             services.AddSingleton<IWeatherControllerSettings, WeatherControllerSettings>();
-            services.AddSingleton<ITeamService>(new TeamService());
+            services.AddSingleton<ITeamService, TeamService>();
             services.AddSingleton<ITimeService>(new TimeService());
             services.AddSwaggerGen(c =>
             {
@@ -42,6 +42,7 @@ namespace HelloWorldWeb
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                 c.IncludeXmlComments(xmlPath, includeControllerXmlComments: true);
             });
+            services.AddSignalR();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -67,6 +68,7 @@ namespace HelloWorldWeb
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
@@ -74,6 +76,7 @@ namespace HelloWorldWeb
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapHub<MessageHub>("/messagehub");
             });
         }
     }
