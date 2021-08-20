@@ -32,7 +32,7 @@ namespace HelloWorldWeb.Service
             teamInfo.TeamMembers = context.TeamMembers.ToList();
             return teamInfo;
         }
-     
+
         public TeamMember GetTeamMemberById(int id)
         {
             throw new NotImplementedException();

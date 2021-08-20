@@ -4,10 +4,6 @@
     {
         private static int idCount = 0;
 
-        public int Id { get; set; }
-
-        public string Name { get; set; }
-
         public TeamMember(string name)
         {
             this.Name = name;
@@ -15,6 +11,8 @@
             idCount++;
         }
 
+        public int Id { get; set; }
 
+        public string Name { get; set; }
     }
 }
