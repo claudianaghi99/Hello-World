@@ -11,9 +11,6 @@
         {
         }
 
-        public DateTime Now()
-        {
-            return DateTime.Now;
-        }
+        public DateTime Now => DateTime.Now;
     }
 }

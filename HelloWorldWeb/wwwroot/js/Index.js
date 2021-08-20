@@ -1,15 +1,16 @@
 ﻿$(document).ready(function () {
 
     var connection = new signalR.HubConnectionBuilder().withUrl("/messagehub").build();
+    setDelete();
 
-
-    connection.on("NewTeamMemberAdded", function (name, member.Id) {
-        console.log(`New team member added: ${JSON.stringify(name, null, 2)}, ${member.Id}.`)
+    connection.on("NewTeamMemberAdded", function (name, Id) {
+        console.log(`New team member added: ${name} with id ${Id}`);
+        createNewcomer(name, Id)
 
     });
 
     connection.start().then(function () {
-        console.log('Connection Started')
+        console.log('signalr connected')
 
     }).catch(function (err) {
         return console.error(err.toString());
@@ -80,7 +81,8 @@
         $('#editClassmate').attr("member-id", id);
         $('#classmateName').val(currentName);
         $('#editClassmate').modal('show');
-        })
+    })
+
 });
 
 function deleteMember(index) {
@@ -107,3 +109,17 @@ function deleteMember(index) {
         }
     });
 }());
+
+function createNewcomer(name, id) {
+    // Remember string interpolation
+    $("#teamMembersList").append(
+        `<li class="member" id="${id}">
+                <span class="name">${name}</span>
+                <span class="delete fa fa-remove" id="deleteMember"></span>
+                <span class="edit fa fa-pencil"></span>
+         </li>`);
+
+    $("#nameInputId").val("");
+    $('#addMemberButtonId').prop('disabled', true);
+    setDelete();
+}

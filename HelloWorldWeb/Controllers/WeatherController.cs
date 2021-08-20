@@ -31,7 +31,6 @@ namespace HelloWorldWebApp.Controllers
             apiKey = conf.ApiKey;
         }
 
-
         // GET: api/<WeatherController>
         [HttpGet]
         public IEnumerable<DailyWeatherRecord> Get()
@@ -59,6 +58,29 @@ namespace HelloWorldWebApp.Controllers
             // lambda expression
             // result.AddRange(jsonArray.Select(item => CreateDailyWeatherFromJToken(item)));
             return jsonArray.Select(CreateDailyWeatherFromJToken);
+        }
+
+        /// <summary>
+        /// Get a weather forecast for the day in specified amount of days from now.
+        /// </summary>
+        /// <param name="index"> Amount of days from now (from 0 to 7).</param>
+        /// <returns> The weather forecast. </returns>
+        [HttpGet("{index}")]
+        public string Get(int index)
+        {
+            return "value";
+        }
+
+        // POST api/<WeatherController>
+        [HttpPost]
+        public void Post([FromBody] string value)
+        {
+        }
+
+        // PUT api/<WeatherController>/5
+        [HttpPut("{id}")]
+        public void Put(int id, [FromBody] string value)
+        {
         }
 
         private DailyWeatherRecord CreateDailyWeatherFromJToken(JToken item)
@@ -104,29 +126,6 @@ namespace HelloWorldWebApp.Controllers
                 default:
                     throw new Exception($"Unknown weather type {weather}.");
             }
-        }
-
-        /// <summary>
-        /// Get a weather forecast for the day in specified amount of days from now.
-        /// </summary>
-        /// <param name="index"> Amount of days from now (from 0 to 7).</param>
-        /// <returns> The weather forecast. </returns>
-        [HttpGet("{index}")]
-        public string Get(int index)
-        {
-            return "value";
-        }
-
-        // POST api/<WeatherController>
-        [HttpPost]
-        public void Post([FromBody] string value)
-        {
-        }
-
-        // PUT api/<WeatherController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
         }
     }
 }

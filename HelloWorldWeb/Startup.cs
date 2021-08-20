@@ -29,6 +29,7 @@ namespace HelloWorldWeb
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSignalR();
             services.AddControllersWithViews();
             services.AddSingleton<IWeatherControllerSettings, WeatherControllerSettings>();
             services.AddSingleton<ITeamService, TeamService>();
@@ -42,7 +43,6 @@ namespace HelloWorldWeb
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                 c.IncludeXmlComments(xmlPath, includeControllerXmlComments: true);
             });
-            services.AddSignalR();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

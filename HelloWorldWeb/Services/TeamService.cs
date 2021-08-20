@@ -9,15 +9,13 @@
 
     public class TeamService : ITeamService
     {
-        
         private readonly TeamInfo teamInfo;
-        private ITimeService timeService;
-        private readonly IHubContext<MessageHub> messagehub;
+        private readonly IHubContext<MessageHub> messageHub;
+        private ITimeService timeService = null;
 
         public TeamService(IHubContext<MessageHub> messageHubContext)
         {
-
-            this.messagehub = messageHubContext;
+            this.messageHub = messageHubContext;
             this.teamInfo = new TeamInfo
             {
                 Name = "Team 3",
@@ -29,18 +27,22 @@
             AddTeamMember("Leon");
             AddTeamMember("George");
             AddTeamMember("Dragos");
-            
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TeamService"/> class.
+        /// </summary>
         public TeamService()
         {
         }
 
+        /// <inheritdoc/>
         public TeamInfo GetTeamInfo()
         {
             return this.teamInfo;
         }
 
+        /// <inheritdoc/>
         public TeamMember GetTeamMemberById(int id)
         {
             foreach (TeamMember member in teamInfo.TeamMembers)
@@ -54,12 +56,12 @@
             return null;
         }
 
+        /// <inheritdoc/>
         public int AddTeamMember(string name)
         {
-
             TeamMember member = new TeamMember(name, timeService);
             this.teamInfo.TeamMembers.Add(member);
-            messagehub.Clients.All.SendAsync("NewTeamMemberAdded", name, member.Id);
+            messageHub.Clients.All.SendAsync("NewTeamMemberAdded", name, member.Id);
             return member.Id;
         }
 
