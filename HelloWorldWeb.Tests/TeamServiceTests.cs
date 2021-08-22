@@ -23,7 +23,7 @@ namespace HelloWorldWeb.Tests
             Assert.Equal(initialCount + 1, teamService.GetTeamInfo().TeamMembers.Count);
         }
 
-        [Fact]
+            [Fact]
         public void RemoveMemberFromTheTeam()
         {
             // Assume

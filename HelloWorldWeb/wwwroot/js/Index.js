@@ -1,17 +1,16 @@
 ﻿$(document).ready(function () {
 
     var connection = new signalR.HubConnectionBuilder().withUrl("/messagehub").build();
-    setDelete();
 
-    connection.on("NewTeamMemberAdded", function (name, Id) {
-        console.log(`New team member added: ${name} with id ${Id}`);
-        createNewcomer(name, Id)
-
+    connection.on("NewTeamMemberAdded", function (member, memberId) {
+        console.log(`new Team Member Added: ${JSON.stringify(member, null, 2)} ${memberId}`)
+        createNewComer(member);
     });
 
-    connection.start().then(function () {
-        console.log('signalr connected')
 
+
+    connection.start().then(function () {
+        console.log('Connection Started')
     }).catch(function (err) {
         return console.error(err.toString());
     });
@@ -82,7 +81,6 @@
         $('#classmateName').val(currentName);
         $('#editClassmate').modal('show');
     })
-
 });
 
 function deleteMember(index) {
@@ -110,16 +108,15 @@ function deleteMember(index) {
     });
 }());
 
-function createNewcomer(name, id) {
+function createNewComer(member) {
     // Remember string interpolation
-    $("#teamMembersList").append(
-        `<li class="member" id="${id}">
-                <span class="name">${name}</span>
-                <span class="delete fa fa-remove" id="deleteMember"></span>
-                <span class="edit fa fa-pencil"></span>
-         </li>`);
-
-    $("#nameInputId").val("");
-    $('#addMemberButtonId').prop('disabled', true);
-    setDelete();
+    $("#teamList").append(
+        `<li class="member" member-id="${member.id}">
+        <span class="memberName">${member.name}</span>
+        <span class="delete fa fa-remove" onclick="deleteMember("${member.id}")"></span>
+        <span class="edit fa fa-pencil"> </span>
+        </li>`);
 }
+//$("#clear").click(function () {
+//    $("#newcomer").val("");
+//})

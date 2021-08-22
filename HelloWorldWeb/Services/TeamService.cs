@@ -10,8 +10,12 @@
     public class TeamService : ITeamService
     {
         private readonly TeamInfo teamInfo;
+        private ITimeService timeService;
         private readonly IHubContext<MessageHub> messageHub;
-        private ITimeService timeService = null;
+        
+        public TeamService()
+        {
+        }
 
         public TeamService(IHubContext<MessageHub> messageHubContext)
         {
@@ -27,13 +31,6 @@
             AddTeamMember("Leon");
             AddTeamMember("George");
             AddTeamMember("Dragos");
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="TeamService"/> class.
-        /// </summary>
-        public TeamService()
-        {
         }
 
         /// <inheritdoc/>
