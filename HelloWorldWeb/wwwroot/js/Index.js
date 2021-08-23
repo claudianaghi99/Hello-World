@@ -3,11 +3,8 @@
     var connection = new signalR.HubConnectionBuilder().withUrl("/messagehub").build();
 
     connection.on("NewTeamMemberAdded", function (member, memberId) {
-        console.log(`new Team Member Added: ${JSON.stringify(member, null, 2)} ${memberId}`)
-        createNewComer(member);
+        createNewLine(member, memberId);
     });
-
-
 
     connection.start().then(function () {
         console.log('Connection Started')
@@ -25,17 +22,7 @@
                 "name": newcomerName
             },
             success: (result) => {
-                console.log(result);
-                $("#teamList").append(
-                    `<li>
-                <span class="memberName" member-id=${result}>
-                        ${newcomerName}
-                    </span >
-                <span class="delete fa fa-remove" onclick="deleteMember(${result})">
-                    </span>
-                <span class="edit fa fa-pencil">
-                    </span>
-                </li>`);
+               
                 $("#nameField").val("");
                 document.getElementById("createButton").disabled = true;
             },
@@ -120,3 +107,12 @@ function createNewComer(member) {
 //$("#clear").click(function () {
 //    $("#newcomer").val("");
 //})
+
+function createNewLine(member, memberId) {
+    $("#teamList").append(
+        `<li class="member" member-id=${memberId}>
+<span class="name" >${member}</span>
+<span class="delete fa fa-remove" onclick="deleteMember(${memberId})"></span>
+<span class="pencil fa fa-pencil"></span>
+</li>`);
+}
