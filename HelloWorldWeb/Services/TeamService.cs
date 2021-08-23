@@ -58,8 +58,12 @@
         {
             TeamMember member = new TeamMember(name, timeService);
             this.teamInfo.TeamMembers.Add(member);
-            messageHub.Clients.All.SendAsync("NewTeamMemberAdded", name, member.Id);
-            return member.Id;
+            if (messageHub.Clients != null)
+            {
+                messageHub.Clients.All.SendAsync("NewTeamMemberAdded", name, member.Id);
+            }
+
+             return member.Id;
         }
 
         public void RemoveMember(int id)

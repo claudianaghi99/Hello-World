@@ -1,7 +1,10 @@
 using HelloWorldWeb.Models;
 using HelloWorldWeb.Services;
+using Microsoft.AspNetCore.SignalR;
+using Moq;
 using System;
 using System.Linq;
+using System.Threading;
 using Xunit;
 
 namespace HelloWorldWeb.Tests
@@ -9,6 +12,8 @@ namespace HelloWorldWeb.Tests
     public class TeamServiceTest
     {
         private ITimeService timeService;
+        private Mock<IHubContext<MessageHub>> messageHubMock = null;
+
         [Fact]
         public void AddTeamMemberToTheTeam()
         {
@@ -59,7 +64,7 @@ namespace HelloWorldWeb.Tests
             //Assume
             ITeamService teamService = new TeamService();
             var memberToBeDeleted = teamService.GetTeamInfo().TeamMembers[teamService.GetTeamInfo().TeamMembers.Count - 2];
-            var newMemberName = "Boris";
+            var newMemberName = "Borys";
             //Act
             teamService.RemoveMember(memberToBeDeleted.Id);
             var id = teamService.AddTeamMember(newMemberName);
@@ -69,6 +74,46 @@ namespace HelloWorldWeb.Tests
             Assert.Null(member);
         }
 
+        [Fact]
+        public void CheckLine60()
+        {
+            // Assume
+            InitializeMessageHubMock();
+            var messageHub = messageHubMock.Object;
+
+            // Act
+            messageHub.Clients.All.SendAsync("NewTeamMemberAdded", "Tudor", 2);
+
+            // Assert
+            hubAllClientsMock.Verify(hubAllClients => hubAllClients.SendAsync("NewTeamMemberAdded", "Tudor",2, It.IsAny<CancellationToken>()), Times.Once(), "I expect SendAsync to be called once.");
+           // Mock.Get(hubAllClientsMock).Verify(_ => _.SendAsync("NewTeamMemberAdded", "Tudor", 2), Times.Once());
+        }
+
+        private Mock<IHubClients> hubClientsMock;
+        private Mock<IClientProxy> hubAllClientsMock;
+
+        private void InitializeMessageHubMock()
+        {
+            // https://www.codeproject.com/Articles/1266538/Testing-SignalR-Hubs-in-ASP-NET-Core-2-1
+            hubAllClientsMock = new Mock<IClientProxy>();
+            hubClientsMock = new Mock<IHubClients>();
+            hubClientsMock.Setup(_ => _.All).Returns(hubAllClientsMock.Object);
+            messageHubMock = new Mock<IHubContext<MessageHub>>();
+
+            messageHubMock.SetupGet(_ => _.Clients).Returns(hubClientsMock.Object);
+        }
+
+        private IHubContext<MessageHub> GetMockedMessageHub()
+        {
+            if (messageHubMock == null)
+            {
+                InitializeMessageHubMock();
+            }
+
+
+
+            return messageHubMock.Object;
+        }
 
     }
 }
