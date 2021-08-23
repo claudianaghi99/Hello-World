@@ -62,6 +62,7 @@
         {
             var member = GetTeamMemberById(id);
             this.teamInfo.TeamMembers.Remove(member);
+            this.broadcastService.TeamMemberDeleted(id);
         }
 
         public void UpdateMemberName(int memberId, string name)

@@ -10,6 +10,8 @@ namespace HelloWorldWeb.Tests
     public class TeamServiceTest
     {
         private ITimeService timeService;
+        private ITeamService teamService;
+        private ITeamService teamServiceForRemove;
         private IBroadcastService broadcastService;
 
         [Fact]
@@ -18,7 +20,7 @@ namespace HelloWorldWeb.Tests
             //Assume
             Mock<IBroadcastService> broadcastServiceMock = new Mock<IBroadcastService>();
             broadcastService = broadcastServiceMock.Object;
-            ITeamService teamService = new TeamService();
+           // ITeamService teamService = new TeamService();
 
             //Act
             int initialCount = teamService.GetTeamInfo().TeamMembers.Count;
@@ -33,7 +35,7 @@ namespace HelloWorldWeb.Tests
         public void RemoveMemberFromTheTeam()
         {
             // Assume
-            ITeamService teamServiceForRemove = new TeamService();
+           // ITeamService teamServiceForRemove = new TeamService();
             int initialCount = teamServiceForRemove.GetTeamInfo().TeamMembers.Count;
             TeamMember firstMember = teamServiceForRemove.GetTeamInfo().TeamMembers[0];
 
@@ -48,7 +50,7 @@ namespace HelloWorldWeb.Tests
         public void UpdateTeamMember()
         {
             //Assume
-            TeamService teamService = new TeamService();
+           // TeamService teamService = new TeamService();
             TeamMember firstMember = teamService.GetTeamInfo().TeamMembers[0];
             int currentId = firstMember.Id;
 
@@ -63,7 +65,7 @@ namespace HelloWorldWeb.Tests
         public void CheckIdProblem()
         {
             //Assume
-            ITeamService teamService = new TeamService();
+           // ITeamService teamService = new TeamService();
             var memberToBeDeleted = teamService.GetTeamInfo().TeamMembers[teamService.GetTeamInfo().TeamMembers.Count - 2];
             var newMemberName = "Boris";
             //Act

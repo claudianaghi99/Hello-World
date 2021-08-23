@@ -9,6 +9,7 @@
     public class BroadcastService : IBroadcastService
     {
         private readonly IHubContext<MessageHub> messageHub;
+
         public BroadcastService(IHubContext<MessageHub> messageHub)
         {
             this.messageHub = messageHub;
@@ -17,6 +18,11 @@
         public void NewTeamMemberAdded(string name, int id)
         {
             messageHub.Clients.All.SendAsync("NewTeamMemberAdded", name, id);
+        }
+
+        public void TeamMemberDeleted(int id)
+        {
+            messageHub.Clients.All.SendAsync("NewTeamMemberDeleted", id);
         }
     }
 }
