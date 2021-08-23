@@ -10,16 +10,12 @@
     public class TeamService : ITeamService
     {
         private readonly TeamInfo teamInfo;
-        private ITimeService timeService;
-        private readonly IHubContext<MessageHub> messageHub;
-        
-        public TeamService()
-        {
-        }
+        private readonly ITimeService timeService;
+        private readonly IBroadcastService broadcastService;
 
-        public TeamService(IHubContext<MessageHub> messageHubContext)
+        public TeamService(IBroadcastService broadcastService)
         {
-            this.messageHub = messageHubContext;
+            this.broadcastService = broadcastService;
             this.teamInfo = new TeamInfo
             {
                 Name = "Team 3",
@@ -58,7 +54,7 @@
         {
             TeamMember member = new TeamMember(name, timeService);
             this.teamInfo.TeamMembers.Add(member);
-            messageHub.Clients.All.SendAsync("NewTeamMemberAdded", name, member.Id);
+            broadcastService.NewTeamMemberAdded(name, member.Id);
             return member.Id;
         }
 

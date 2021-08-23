@@ -1,5 +1,6 @@
 using HelloWorldWeb.Models;
 using HelloWorldWeb.Services;
+using Moq;
 using System;
 using System.Linq;
 using Xunit;
@@ -9,10 +10,14 @@ namespace HelloWorldWeb.Tests
     public class TeamServiceTest
     {
         private ITimeService timeService;
+        private IBroadcastService broadcastService;
+
         [Fact]
         public void AddTeamMemberToTheTeam()
         {
             //Assume
+            Mock<IBroadcastService> broadcastServiceMock = new Mock<IBroadcastService>();
+            broadcastService = broadcastServiceMock.Object;
             ITeamService teamService = new TeamService();
 
             //Act
@@ -21,6 +26,7 @@ namespace HelloWorldWeb.Tests
 
             //Assert
             Assert.Equal(initialCount + 1, teamService.GetTeamInfo().TeamMembers.Count);
+            broadcastServiceMock.Verify(_ => _.NewTeamMemberAdded(It.IsAny<string>(), 7),Times.Once());
         }
 
             [Fact]

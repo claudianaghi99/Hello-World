@@ -53,7 +53,8 @@ namespace HelloWorldWeb.Controllers
 
         public IActionResult Index()
         {
-             return this.View(this.teamService.GetTeamInfo());
+            var teamInfo = this.teamService.GetTeamInfo();
+             return this.View(teamInfo);
         }
 
         public IActionResult Privacy()
