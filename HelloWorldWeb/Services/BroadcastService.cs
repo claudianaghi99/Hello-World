@@ -22,7 +22,7 @@
 
         public void TeamMemberDeleted(int id)
         {
-            messageHub.Clients.All.SendAsync("NewTeamMemberDeleted", id);
+            messageHub.Clients.All.SendAsync("TeamMemberDeleted", id);
         }
     }
 }

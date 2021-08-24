@@ -40,9 +40,9 @@ namespace HelloWorldWeb.Controllers
         }
 
         [HttpDelete]
-        public void RemoveMember(int memberIndex)
+        public void RemoveMember(int id)
         {
-            teamService.RemoveMember(memberIndex);
+            teamService.RemoveMember(id);
         }
 
         [HttpPost]
