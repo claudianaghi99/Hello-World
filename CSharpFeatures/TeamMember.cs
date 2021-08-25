@@ -1,8 +1,8 @@
-﻿using System;
-using System.Diagnostics;
-
-namespace CSharpFeatures_C
+﻿namespace CSharpFeatures
 {
+    using System;
+    using System.Diagnostics;
+
     [DebuggerDisplay("{Name}[{Id}]")]
     public class TeamMember
     {

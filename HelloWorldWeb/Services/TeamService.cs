@@ -1,16 +1,12 @@
 ﻿namespace HelloWorldWeb.Services
 {
-    using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading.Tasks;
     using HelloWorldWeb.Models;
-    using Microsoft.AspNetCore.SignalR;
 
     public class TeamService : ITeamService
     {
         private readonly TeamInfo teamInfo;
-        private readonly ITimeService timeService;
+        private readonly ITimeService timeService = null;
         private readonly IBroadcastService broadcastService;
 
         public TeamService(IBroadcastService broadcastService)
@@ -29,13 +25,11 @@
             AddTeamMember("Dragos");
         }
 
-        /// <inheritdoc/>
         public TeamInfo GetTeamInfo()
         {
             return this.teamInfo;
         }
 
-        /// <inheritdoc/>
         public TeamMember GetTeamMemberById(int id)
         {
             foreach (TeamMember member in teamInfo.TeamMembers)
@@ -49,12 +43,11 @@
             return null;
         }
 
-        /// <inheritdoc/>
         public int AddTeamMember(string name)
         {
-            TeamMember member = new TeamMember() { Name = name }; ;
+            TeamMember member = new TeamMember(name, timeService);
             this.teamInfo.TeamMembers.Add(member);
-            broadcastService.NewTeamMemberAdded(name, member.Id);
+            broadcastService.NewTeamMemberAdded(member, member.Id); // kept for testing Mock Broadcast
             return member.Id;
         }
 
@@ -62,14 +55,20 @@
         {
             var member = GetTeamMemberById(id);
             this.teamInfo.TeamMembers.Remove(member);
-            this.broadcastService.TeamMemberDeleted(id);
+            // this.broadcastService.TeamMemberDeleted(id);
         }
 
         public void UpdateMemberName(int memberId, string name)
         {
             int index = teamInfo.TeamMembers.FindIndex(element => element.Id == memberId);
             teamInfo.TeamMembers[index].Name = name;
-            this.broadcastService.TeamMemberEdited(memberId, name);
+            // this.broadcastService.TeamMemberEdited(memberId, name);
+        }
+
+        public int AddTeamMember(TeamMember member)
+        {
+            teamInfo.TeamMembers.Add(member);
+            return member.Id;
         }
     }
 }

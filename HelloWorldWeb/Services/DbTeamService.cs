@@ -24,6 +24,13 @@
             return teamMember.Id;
         }
 
+        public int AddTeamMember(TeamMember member)
+        {
+            _context.Add(member);
+            _context.SaveChanges();
+            return member.Id;
+        }
+
         public TeamInfo GetTeamInfo()
         {
             TeamInfo teamInfo = new TeamInfo();

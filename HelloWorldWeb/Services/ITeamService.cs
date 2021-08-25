@@ -4,6 +4,8 @@
 
     public interface ITeamService
     {
+        int AddTeamMember(TeamMember member);
+
         int AddTeamMember(string name);
 
         TeamInfo GetTeamInfo();

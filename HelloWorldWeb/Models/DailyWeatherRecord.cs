@@ -7,7 +7,7 @@
 
     public class DailyWeatherRecord
     {
-        public const float KELVINCONST = 273.15f;
+        public const float KELVIN_CONST = 273.15f;
 
         public DailyWeatherRecord(DateTime day, float temperature, WeatherType type)
         {
@@ -24,7 +24,7 @@
 
         public static float ConvertKelvinToCelsius(float temp)
         {
-            float celsiusTemperature = temp - KELVINCONST;
+            float celsiusTemperature = temp - KELVIN_CONST;
             return (float)Math.Round(celsiusTemperature, 2);
         }
     }

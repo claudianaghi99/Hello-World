@@ -1,10 +1,7 @@
 ﻿namespace HelloWorldWeb.Services
 {
+    using HelloWorldWeb.Models;
     using Microsoft.AspNetCore.SignalR;
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading.Tasks;
 
     public class BroadcastService : IBroadcastService
     {
@@ -15,9 +12,9 @@
             this.messageHub = messageHub;
         }
 
-        public void NewTeamMemberAdded(string name, int id)
+        public void NewTeamMemberAdded(TeamMember member, int id)
         {
-            messageHub.Clients.All.SendAsync("NewTeamMemberAdded", name, id);
+            messageHub.Clients.All.SendAsync("NewTeamMemberAdded", member, member.Id);
         }
 
         public void TeamMemberDeleted(int id)

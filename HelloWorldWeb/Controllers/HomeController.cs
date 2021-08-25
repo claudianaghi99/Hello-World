@@ -5,10 +5,7 @@
 namespace HelloWorldWeb.Controllers
 {
     using System;
-    using System.Collections.Generic;
     using System.Diagnostics;
-    using System.Linq;
-    using System.Threading.Tasks;
     using HelloWorldWeb.Models;
     using HelloWorldWeb.Services;
     using Microsoft.AspNetCore.Mvc;
@@ -18,11 +15,15 @@ namespace HelloWorldWeb.Controllers
     {
         private readonly ILogger<HomeController> logger;
         private readonly ITeamService teamService;
+        private readonly ITimeService timeService;
+        private readonly IBroadcastService broadcastService;
 
-        public HomeController(ILogger<HomeController> logger, ITeamService teamService)
+        public HomeController(ILogger<HomeController> logger, ITeamService teamService, ITimeService timeService, IBroadcastService broadcastService)
         {
             this.logger = logger;
             this.teamService = teamService;
+            this.timeService = timeService;
+            this.broadcastService = broadcastService;
         }
 
         [HttpGet]
@@ -34,25 +35,30 @@ namespace HelloWorldWeb.Controllers
         [HttpPost]
         public int AddTeamMember(string name)
         {
-            return this.teamService.AddTeamMember(name);
+            //TeamMember member = new TeamMember(name, timeService);
+            TeamMember member = new TeamMember() { Name = name };
+            int newMemberId = this.teamService.AddTeamMember(member);
+            broadcastService.NewTeamMemberAdded(member, member.Id);
+            return newMemberId;
         }
 
         [HttpDelete]
         public void RemoveMember(int id)
         {
             teamService.RemoveMember(id);
+            this.broadcastService.TeamMemberDeleted(id);
         }
 
         [HttpPost]
         public void UpdateMemberName(int memberId, String name)
         {
             teamService.UpdateMemberName(memberId, name);
+            this.broadcastService.TeamMemberEdited(memberId, name);
         }
 
         public IActionResult Index()
         {
-            var teamInfo = this.teamService.GetTeamInfo();
-             return this.View(teamInfo);
+             return this.View(this.teamService.GetTeamInfo());
         }
 
         public IActionResult Privacy()

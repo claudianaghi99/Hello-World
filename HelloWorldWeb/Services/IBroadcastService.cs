@@ -1,8 +1,10 @@
 ﻿namespace HelloWorldWeb.Services
 {
+    using HelloWorldWeb.Models;
+
     public interface IBroadcastService
     {
-        void NewTeamMemberAdded(string name, int id);
+        void NewTeamMemberAdded(TeamMember member, int id);
 
         void TeamMemberDeleted(int id);
 

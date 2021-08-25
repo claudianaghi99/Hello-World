@@ -1,21 +1,12 @@
-﻿// <copyright file="Program.cs" company="PlaceholderCompany">
-// Copyright (c) PlaceholderCompany. All rights reserved.
-// </copyright>
+﻿using System;
 
 namespace Hello_World
 {
-    using System;
-
     public class Program
     {
-        public static void Main(string[] args)
+        private static void Main(string[] args)
         {
-            if (args is null)
-            {
-                throw new ArgumentNullException(nameof(args));
-            }
-
-            Console.WriteLine("Hello Everyone!");
+            Console.WriteLine("Hello Cluj!!!");
         }
     }
 }

@@ -1,17 +1,13 @@
 using HelloWorldWeb.Models;
 using HelloWorldWeb.Services;
 using Moq;
-using System;
-using System.Linq;
+using System.Collections.Generic;
 using Xunit;
 
 namespace HelloWorldWeb.Tests
 {
     public class TeamServiceTest
     {
-        private ITimeService timeService;
-        private ITeamService teamService;
-        private ITeamService teamServiceForRemove;
         private IBroadcastService broadcastService;
 
         [Fact]
@@ -20,44 +16,51 @@ namespace HelloWorldWeb.Tests
             //Assume
             Mock<IBroadcastService> broadcastServiceMock = new Mock<IBroadcastService>();
             broadcastService = broadcastServiceMock.Object;
-           // ITeamService teamService = new TeamService();
+            ITeamService teamService = new TeamService(broadcastService);
 
             //Act
             int initialCount = teamService.GetTeamInfo().TeamMembers.Count;
             teamService.AddTeamMember("Delia");
+            TeamMember lastMember = teamService.GetTeamInfo().TeamMembers[initialCount];
 
             //Assert
             Assert.Equal(initialCount + 1, teamService.GetTeamInfo().TeamMembers.Count);
-            broadcastServiceMock.Verify(_ => _.NewTeamMemberAdded(It.IsAny<string>(), 7),Times.Once());
+            List<TeamMember> newList= teamService.GetTeamInfo().TeamMembers;
+            broadcastServiceMock.Verify(_ => _.NewTeamMemberAdded(It.IsAny<TeamMember>(), lastMember.Id), Times.Once());
+            // other version: 
+            //broadcastServiceMock.Verify(_ => _.NewTeamMemberAdded(lastMember, lastMember.Id), Times.Once());
         }
 
-            [Fact]
+        //[Fact (Skip = "fails right now later.")] - how to skip a test
+        [Fact]
         public void RemoveMemberFromTheTeam()
         {
             // Assume
-           // ITeamService teamServiceForRemove = new TeamService();
+            Mock<IBroadcastService> broadcastServiceMock = new Mock<IBroadcastService>();
+            broadcastService = broadcastServiceMock.Object;
+            ITeamService teamServiceForRemove = new TeamService(broadcastService);
             int initialCount = teamServiceForRemove.GetTeamInfo().TeamMembers.Count;
             TeamMember firstMember = teamServiceForRemove.GetTeamInfo().TeamMembers[0];
 
             // Act
-            int initialCountForRemove = teamServiceForRemove.GetTeamInfo().TeamMembers.Count;
-            TeamMember firstMember = teamServiceForRemove.GetTeamInfo().TeamMembers[0];
             teamServiceForRemove.RemoveMember(firstMember.Id);
 
             // Assert
-            Assert.Equal(initialCountForRemove - 1, teamServiceForRemove.GetTeamInfo().TeamMembers.Count);
+            Assert.Equal(initialCount - 1, teamServiceForRemove.GetTeamInfo().TeamMembers.Count);
         }
 
         [Fact]
         public void UpdateTeamMember()
         {
             //Assume
-           // TeamService teamService = new TeamService();
+            Mock<IBroadcastService> broadcastServiceMock = new Mock<IBroadcastService>();
+            broadcastService = broadcastServiceMock.Object;
+            ITeamService teamService = new TeamService(broadcastService);
             TeamMember firstMember = teamService.GetTeamInfo().TeamMembers[0];
             int currentId = firstMember.Id;
 
             // Act
-            teamService.UpdateMemberName(0,"Alex");
+            teamService.UpdateMemberName(currentId,"Alex");
 
             // Assert
             Assert.Equal("Alex", teamService.GetTeamMemberById(currentId).Name);
@@ -67,7 +70,9 @@ namespace HelloWorldWeb.Tests
         public void CheckIdProblem()
         {
             //Assume
-           // ITeamService teamService = new TeamService();
+            Mock<IBroadcastService> broadcastServiceMock = new Mock<IBroadcastService>();
+            broadcastService = broadcastServiceMock.Object;
+            ITeamService teamService = new TeamService(broadcastService);
             var memberToBeDeleted = teamService.GetTeamInfo().TeamMembers[teamService.GetTeamInfo().TeamMembers.Count - 2];
             var newMemberName = "Boris";
             //Act
@@ -78,5 +83,6 @@ namespace HelloWorldWeb.Tests
             var member = teamService.GetTeamInfo().TeamMembers.Find(element => element.Name == newMemberName);
             Assert.Null(member);
         }
+
     }
 }

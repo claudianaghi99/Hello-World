@@ -16,6 +16,7 @@
     connection.on("TeamMemberEdited", function (id, name) {
         editMember(id, name);
     })
+
     connection.start().then(function () {
         console.log('Connection Started')
     }).catch(function (err) {
@@ -24,7 +25,7 @@
 
     $("#createButton").click(function () {
         var newcomerName = $("#nameField").val();
-        var length = $("#teamList").children().length;
+        var length = $("#teamMembers").children().length;
         $.ajax({
             method: "POST",
             url: "/Home/AddTeamMember",
@@ -32,9 +33,8 @@
                 "name": newcomerName
             },
             success: (result) => {
-                location.reload();
                 $("#nameField").val("");
-                document.getElementById("createButton").disabled = true;                
+                document.getElementById("createButton").disabled = true;
             },
             error: function (err) {
                 console.log(err);
@@ -62,7 +62,6 @@
             },
             success: function (result) {
                 location.reload();
-                console.log("edit:" + id);
             }
         })
     })
@@ -92,7 +91,6 @@ function setDelete() {
                 "id": id
             },
             success: (result) => {
-               // location.reload();
                 console.log("delete:" + id);
             }
         })
@@ -110,21 +108,7 @@ function setEdit() {
         $('#editClassmate').modal('show');
     })
 }
-/*
-function deleteMember(index) {
-    $.ajax({
-        url: "/Home/RemoveMember",
-        method: "DELETE",
-        data: {
-            memberIndex: index
-        },
-        success: function (result) {
-            location.reload();
-        }
-    })
-}
 
-*/
 (function () {
     $('#nameField').on('change textInput input', function () {
         var inputVal = this.value;
@@ -136,11 +120,11 @@ function deleteMember(index) {
     });
 }());
 
-function createNewComer(member, memberId) {
+function createNewComer (member, memberId) {
     // Remember string interpolation
     $("#teamList").append(
         `<li class="member" member-id="${memberId}">
-        <span class="memberName">${member}</span>
+        <span class="memberName">${member.name}</span>
         <span class="delete fa fa-remove"></span>
         <span class="edit fa fa-pencil"> </span>
         </li>`);

@@ -10,25 +10,26 @@ namespace HelloWorldWeb
     using Microsoft.Extensions.Logging;
 
     public class Program
-{
-    public static void Main(string[] args)
     {
-        CreateHostBuilder(args).Build().Run();
-    }
+        public static void Main(string[] args)
+        {
+            CreateHostBuilder(args).Build().Run();
+        }
 
     public static IHostBuilder CreateHostBuilder(string[] args) =>
-         /*Host.CreateDefaultBuilder(args)
-         .ConfigureWebHostDefaults(webBuilder =>
-         {
-             var port = Environment.GetEnvironmentVariable("PORT");
-             webBuilder.UseStartup<Startup>()
-         .UseUrls("http://*:" + port);
-         });*/
+        /*Host.CreateDefaultBuilder(args)
+        .ConfigureWebHostDefaults(webBuilder =>
+        {
+            var port = Environment.GetEnvironmentVariable("PORT");
+
+            webBuilder.UseStartup<Startup>()
+        .UseUrls("http://*:" + port);
+        });*/
 
          Host.CreateDefaultBuilder(args)
         .ConfigureWebHostDefaults(webBuilder =>
         {
-            webBuilder.UseStartup<Startup>();
+        webBuilder.UseStartup<Startup>();
         });
-}
+    }
 }
