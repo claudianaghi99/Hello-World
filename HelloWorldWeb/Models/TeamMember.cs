@@ -1,21 +1,7 @@
 ﻿namespace HelloWorldWeb.Models
 {
-    using System;
-    using HelloWorldWeb.Services;
-
     public class TeamMember
     {
-        private static int idCount = 0;
-        private readonly ITimeService timeService;
-
-        public TeamMember(string name, ITimeService timeService)
-        {
-            this.Name = name;
-            this.Id = idCount;
-            idCount++;
-            this.timeService = timeService;
-        }
-
         public int Id { get; set; }
 
         public string Name { get; set; }

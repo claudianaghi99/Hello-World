@@ -40,10 +40,12 @@ namespace HelloWorldWeb.Tests
             TeamMember firstMember = teamServiceForRemove.GetTeamInfo().TeamMembers[0];
 
             // Act
+            int initialCountForRemove = teamServiceForRemove.GetTeamInfo().TeamMembers.Count;
+            TeamMember firstMember = teamServiceForRemove.GetTeamInfo().TeamMembers[0];
             teamServiceForRemove.RemoveMember(firstMember.Id);
 
             // Assert
-            Assert.Equal(initialCount - 1, teamServiceForRemove.GetTeamInfo().TeamMembers.Count);
+            Assert.Equal(initialCountForRemove - 1, teamServiceForRemove.GetTeamInfo().TeamMembers.Count);
         }
 
         [Fact]
@@ -55,7 +57,7 @@ namespace HelloWorldWeb.Tests
             int currentId = firstMember.Id;
 
             // Act
-            teamService.UpdateMemberName(currentId,"Alex");
+            teamService.UpdateMemberName(0,"Alex");
 
             // Assert
             Assert.Equal("Alex", teamService.GetTeamMemberById(currentId).Name);
@@ -76,7 +78,5 @@ namespace HelloWorldWeb.Tests
             var member = teamService.GetTeamInfo().TeamMembers.Find(element => element.Name == newMemberName);
             Assert.Null(member);
         }
-
-
     }
 }

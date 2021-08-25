@@ -2,20 +2,18 @@ namespace HelloWorldWeb
 {
     using System;
     using System.Collections.Generic;
-    using System.IO;
     using System.Linq;
-    using System.Reflection;
     using System.Threading.Tasks;
-    using HelloWorldWeb.Controllers;
+    using HelloWorldWeb.Data;
     using HelloWorldWeb.Services;
-    using HelloWorldWebApp.Controllers;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.HttpsPolicy;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
-    using Microsoft.OpenApi.Models;
 
     public class Startup
     {
@@ -26,9 +24,27 @@ namespace HelloWorldWeb
 
         public IConfiguration Configuration { get; }
 
+        public static string ConvertHerokuStringToAspnetString(string herokuConnectionString)
+        {
+            var databaseUri = new Uri(herokuConnectionString);
+            string databaseUriArray = databaseUri.UserInfo;
+
+            var databaseUriUsername = databaseUriArray.Split(":")[0];
+            var databaseUriPassword = databaseUriArray.Split(":")[1];
+            var databaseName = databaseUri.LocalPath.TrimStart('/');
+            return $"Host={databaseUri.Host};Port={databaseUri.Port};Database={databaseName};User Id={databaseUriUsername};Password={databaseUriPassword};Pooling=true;SSL Mode=Require;TrustServerCertificate=True;";
+        }
+
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseNpgsql(
+                    Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDatabaseDeveloperPageExceptionFilter();
+
+            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+                .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
             services.AddSingleton<IWeatherControllerSettings, WeatherControllerSettings>();
             services.AddSingleton<ITeamService, TeamService>();
@@ -51,10 +67,8 @@ namespace HelloWorldWeb
         {
             if (env.IsDevelopment())
             {
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "WebAPI v1"));
-
                 app.UseDeveloperExceptionPage();
+                app.UseMigrationsEndPoint();
             }
             else
             {
@@ -69,6 +83,7 @@ namespace HelloWorldWeb
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
@@ -76,6 +91,7 @@ namespace HelloWorldWeb
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapRazorPages();
                 endpoints.MapHub<MessageHub>("/messagehub");
             });
         }

@@ -52,7 +52,7 @@
         /// <inheritdoc/>
         public int AddTeamMember(string name)
         {
-            TeamMember member = new TeamMember(name, timeService);
+            TeamMember member = new TeamMember() { Name = name }; ;
             this.teamInfo.TeamMembers.Add(member);
             broadcastService.NewTeamMemberAdded(name, member.Id);
             return member.Id;
