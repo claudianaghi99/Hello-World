@@ -23,6 +23,7 @@ namespace HelloWorldWeb.Controllers
         // GET: Users
         public async Task<IActionResult> Index()
         {
+            ViewData["Administrators"] = await userManager.GetUsersInRoleAsync("Administrators");
             return View(await userManager.Users.ToListAsync());
         }
 
@@ -30,14 +31,15 @@ namespace HelloWorldWeb.Controllers
         {
             var user = await userManager.FindByIdAsync(id);
             await userManager.AddToRoleAsync(user, "Administrators");
-            return View("Index", await userManager.Users.ToListAsync());
+            return RedirectToAction(nameof(Index));
         }
 
         public async Task<IActionResult> AssignUsualRole(string id)
         {
             var user = await userManager.FindByIdAsync(id);
             await userManager.RemoveFromRoleAsync(user, "Administrators");
-            return View("Index", await userManager.Users.ToListAsync());
+            return RedirectToAction(nameof(Index));
+
         }
 
         //// GET: Users/Details/5

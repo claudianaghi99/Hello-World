@@ -20,24 +20,39 @@
             <th>
                 @Html.DisplayNameFor(model => model.Email)
             </th>
-            <th></th>
+          
+            @if (User.IsInRole("Administrators"))
+            {
+                <th>Change Role</th>
+}
+            else
+            {
+                <th>Role</th>
+}
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.UserName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Email)
-                </td>
-                <td>
-                    <a asp-action="AssignAdminRole" asp-route-id="@item.Id">Assign Administrator</a> |
-                    <a asp-action="AssignUsualRole" asp-route-id="@item.Id">Assign Ususal User Role</a>
-                </td>
-            </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @if (ViewBag.Administrators.Contains(item) )
+
+                {
+                    <a asp-action="AssignUsualRole" asp-route-id="@item.Id">Assign Usual Role</a>
+                }
+                else
+                {
+                    <a asp-action="AssignAdminRole" asp-route-id="@item.Id">Assign Administrator Role</a>
+                }
+            </td>
+        </tr>
         }
     </tbody>
 </table>
