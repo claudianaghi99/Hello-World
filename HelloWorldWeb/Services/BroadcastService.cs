@@ -1,4 +1,4 @@
-﻿namespace HelloWorldWeb.Services
+﻿namespace HelloWorldWeb.services
 {
     using HelloWorldWeb.Models;
     using Microsoft.AspNetCore.SignalR;

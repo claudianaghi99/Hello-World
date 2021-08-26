@@ -5,7 +5,7 @@ namespace HelloWorldWeb
     using System.Reflection;
     using HelloWorldWeb.Controllers;
     using HelloWorldWeb.Data;
-    using HelloWorldWeb.Services;
+    using HelloWorldWeb.services;
     using HelloWorldWebApp.Controllers;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
@@ -74,6 +74,9 @@ namespace HelloWorldWeb
             });
             services.AddSignalR();
             services.AddSingleton<IBroadcastService, BroadcastService>();
+
+            AssignRoleProgramatically(services.BuildServiceProvider());
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -112,6 +115,15 @@ namespace HelloWorldWeb
                 endpoints.MapRazorPages();
                 endpoints.MapHub<MessageHub>("/messagehub");
             });
+
+          //  AssignRoleProgramatically(app.ApplicationServices);
+        }
+
+        private async void AssignRoleProgramatically(IServiceProvider services)
+        {
+            UserManager<IdentityUser> userManager = services.GetRequiredService<UserManager<IdentityUser>>();
+            IdentityUser user = await userManager.FindByNameAsync("claudianaghi99@gmail.com");
+            await userManager.AddToRoleAsync(user, "Administrators");
         }
     }
 }

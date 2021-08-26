@@ -7,7 +7,7 @@ namespace HelloWorldWeb.Controllers
     using System;
     using System.Diagnostics;
     using HelloWorldWeb.Models;
-    using HelloWorldWeb.Services;
+    using HelloWorldWeb.services;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Logging;

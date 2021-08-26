@@ -1,4 +1,4 @@
-﻿namespace HelloWorldWeb.Services
+﻿namespace HelloWorldWeb.services
 {
     using System;
     using System.Collections.Generic;

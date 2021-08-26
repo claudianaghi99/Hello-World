@@ -1,4 +1,6 @@
-﻿namespace HelloWorldWeb.Data
+﻿using Microsoft.EntityFrameworkCore;
+using HelloWorldWeb.Models;
+namespace HelloWorldWeb.Data
 {
     using System;
     using System.Collections.Generic;
@@ -17,5 +19,6 @@
         public DbSet<HelloWorldWeb.Models.Skill> Skill { get; set; }
 
         public DbSet<HelloWorldWeb.Models.TeamMember> TeamMembers { get; set; }
+
     }
 }
