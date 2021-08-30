@@ -6,7 +6,7 @@ namespace HelloWorldWeb
     using System.Threading.Tasks;
     using HelloWorldWeb.Controllers;
     using HelloWorldWeb.Data;
-    using HelloWorldWeb.services;
+    using HelloWorldWeb.Services;
     using HelloWorldWebApp.Controllers;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
@@ -77,7 +77,9 @@ namespace HelloWorldWeb
             services.AddSignalR();
             services.AddSingleton<IBroadcastService, BroadcastService>();
 
-            AssignRoleProgramatically(services.BuildServiceProvider());
+#pragma warning disable ASP0000 // Do not call 'IServiceCollection.BuildServiceProvider' in 'ConfigureServices'
+            AssignRoleProgramatically(services: services.BuildServiceProvider());
+#pragma warning restore ASP0000 // Do not call 'IServiceCollection.BuildServiceProvider' in 'ConfigureServices'
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -118,13 +120,6 @@ namespace HelloWorldWeb
             });
 
          // AssignRoleProgramatically(app.ApplicationServices)
-        }
-
-        private async void AssignRoleProgramatically(IServiceProvider services)
-        {
-            UserManager<IdentityUser> userManager = services.GetRequiredService<UserManager<IdentityUser>>();
-            IdentityUser user = await userManager.FindByNameAsync("claudianaghi99@gmail.com");
-            await userManager.AddToRoleAsync(user, "Administrators");
         }
 
         private static async Task EnsureUsersCreated(IServiceCollection services)
@@ -176,6 +171,13 @@ namespace HelloWorldWeb
             }
 
             return adminRole;
+        }
+
+        private async void AssignRoleProgramatically(IServiceProvider services)
+        {
+            UserManager<IdentityUser> userManager = services.GetRequiredService<UserManager<IdentityUser>>();
+            IdentityUser user = await userManager.FindByNameAsync("claudianaghi99@gmail.com");
+            await userManager.AddToRoleAsync(user, "Administrators");
         }
     }
 }

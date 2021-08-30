@@ -10,7 +10,7 @@
 
     public class RolesController : Controller
     {
-        RoleManager<IdentityRole> roleManager;
+        private readonly RoleManager<IdentityRole> roleManager;
 
         // injection
         public RolesController(RoleManager<IdentityRole> roleManager)
@@ -51,6 +51,5 @@
                 return View();
             }
         }
-
     }
 }

@@ -7,7 +7,7 @@ namespace HelloWorldWeb.Controllers
     using System;
     using System.Diagnostics;
     using HelloWorldWeb.Models;
-    using HelloWorldWeb.services;
+    using HelloWorldWeb.Services;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Logging;
@@ -38,7 +38,7 @@ namespace HelloWorldWeb.Controllers
         [Authorize]
         public int AddTeamMember(string name)
         {
-            //TeamMember member = new TeamMember(name, timeService);
+            // TeamMember member = new TeamMember(name, timeService);
             TeamMember member = new TeamMember() { Name = name };
             int newMemberId = this.teamService.AddTeamMember(member);
             broadcastService.NewTeamMemberAdded(member, member.Id);
