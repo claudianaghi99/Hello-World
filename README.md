@@ -1,28 +1,32 @@
-# HelloWorldApp
-## How to deploy to Heroku
-1.Login to heroku
-```
-heroku login
-heroku container:login
-```
-2. Build container
 
-Build docker image:
+     ! Heroku deplyed app: https://ema-hww.herokuapp.com/
+      
+# HelloWorldWeb
+## How to deploy to Heroku:
+
+-build container (where the dockerfile is):
 ```
-docker build -t app-helloworld-naghi
+docker build -t imageName(ex:'app-helloworld-naghi') .
 ```
 
-3. Create and run docker container
+-create docker container and run it
 ```
 docker run -d -p 8081:80 --name app-helloworld-naghi_container app-helloworld-naghi
 ```
 
-4. Push container
+-login to Heroku:
+```
+heroku login
+heroku container:login
+```
+
+-build the Dockerfile in the current directory and push the container
 ```
 heroku container:push -a app-helloworld-naghi web
 ```
 
-5. Release the container
+-release the container.
 ```
 heroku container:release -a app-helloworld-naghi web
+
 ```
